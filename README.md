@@ -1,9 +1,9 @@
 ## TpPrograWeb3
 
-#1. Objetivo
+##1. Objetivo
 Este documento describe el alcance funcional y los requisitos técnicos del trabajo práctico de la
 materia Programación Web III.
-#2. Equipo
+##2. Equipo
 El equipo para realizar el trabajo práctico deberá ser de 4 alumnos
 #3. Requisitos Técnicos
 #3.1 Proyecto .NET
