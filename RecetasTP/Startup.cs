@@ -30,8 +30,8 @@ namespace RecetasTP
         {
             // Inyección de dependencias
             services.AddTransient<_20212C_TPContext>();             // Cada vez que haya un request se creará e instanciara un contexto.
-            services.AddScoped<ITestRepository, TestRepository>();  // Cada vez que se use una clase que herede de IUserRepository se va a crear e instanciar un objeto de tipo UserRepository.
-            services.AddScoped<ITestService, TestService>();        // Cada vez que se use una clase que herede de IUserService se va a crear e instanciar un objeto de tipo TestService.
+            services.AddScoped<ITestRepository, TestRepository>();  // Cada vez que se use una clase que herede de ITestRepository se va a crear e instanciar un objeto de tipo TestRepository.
+            services.AddScoped<ITestService, TestService>();        // Cada vez que se use una clase que herede de ITestService se va a crear e instanciar un objeto de tipo TestService.
 
 
             services.AddControllersWithViews();

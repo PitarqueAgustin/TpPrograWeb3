@@ -22,13 +22,29 @@ namespace DAO.Repositories
             return _ctx.Usuarios.OrderBy(o => o.Nombre).ToList();
         }
 
-        public void AddNew(Usuario user1)
+        public void AddNew(Usuario user)
         {
-            // Agrega al contexto el user1
-            _ctx.Usuarios.Add(user1);
+            // Agrega al contexto el user
+            _ctx.Usuarios.Add(user);
             
             // Guarda en la DB el contexto
+            SaveChanges();
+        }
+
+        public void SaveChanges()
+        {
             _ctx.SaveChanges();
+        }
+
+        public Usuario getById(int id)
+        {
+            return _ctx.Usuarios.Find(id);
+        }
+
+        public void DeleteUser(Usuario user)
+        {
+            _ctx.Usuarios.Remove(user);
+            SaveChanges();
         }
     }
 }

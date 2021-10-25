@@ -1,0 +1,31 @@
+﻿@model DAO.Models.Usuario
+
+@{
+    ViewData["Title"] = "Agregar usuario";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Agregar usuario</h1>
+
+    <form action="/test/AddUser" method="post">
+        <div>
+            Nombre: <input type="text" name="Nombre" value="" />
+        </div>
+        <div>
+            Email de tipo texto no copiar OJO: <input type="text" name="Email" value="" />
+        </div>
+        <div>
+            Password: <input type="password" name="Password" value="" />
+        </div>
+        <div>
+            Perfil: <input type="number" name="Perfil" value="" />
+        </div>
+        @*<div>
+                FechaRegistracion: <input type="datetime" name="date" value="" />
+            </div>*@
+        <div>
+            <input type="submit" name="AddUser" value="AddUser" />
+        </div>
+
+    </form>
+</div>

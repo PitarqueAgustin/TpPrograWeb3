@@ -13,15 +13,18 @@
             <th>Email</th>
             <th>Perfil</th>
             <th>FechaRegistracion</th>
+            <th>Acciones</th>
         </tr>
     @foreach (var user in Model)
     {
-        <tr>
-            <td>@user.Nombre</td>
-            <td>@user.Email</td>
-            <td>@user.Perfil</td>
-            <td>@user.FechaRegistracion.</td>
-        </tr>
+    <tr>
+        <td>@user.Nombre</td>
+        <td>@user.Email</td>
+        <td>@user.Perfil</td>
+        <td>@user.FechaRegistracion</td>
+        <td><a href="/test/delete/@user.IdUsuario">Borrar</a></td>
+
+    </tr>
         <br /><br />
     }
     </table>

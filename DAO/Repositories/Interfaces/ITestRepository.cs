@@ -10,6 +10,9 @@ namespace DAO.Repositories.Interfaces
     public interface ITestRepository
     {
         public List<Usuario> GetAll();
-        public void AddNew(Usuario user1);
+        public void AddNew(Usuario user);
+        public void SaveChanges();
+        public Usuario getById(int id);
+        public void DeleteUser(Usuario user);
     }
 }

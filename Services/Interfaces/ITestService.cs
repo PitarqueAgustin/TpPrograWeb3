@@ -11,6 +11,8 @@ namespace Services.Interfaces
     public interface ITestService
     {
         public List<Usuario> GetAll();
-        public void addUser(Usuario user1);
+        public void addUser(Usuario user);
+        public Usuario getById(int id);
+        public void deleteUser(Usuario user);
     }
 }

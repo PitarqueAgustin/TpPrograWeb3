@@ -40,21 +40,38 @@ namespace RecetasTP.Controllers
             return View(users);
         }
 
+        [HttpGet]
         public IActionResult NewUser()
         {
-            // Instancia y llena el objeto Usuario del modelo Usuario dentro de DAO/Models
-            Usuario user1 = new Usuario();
-            user1.Nombre = "Juan";
-            user1.Password = "1234";
-            user1.Email = "email@email.com";
-            user1.Perfil = 123;
-            user1.FechaRegistracion = DateTime.Now;
-
-            // Llama al servicio correspondiente para guardar el usuario
-            _testService.addUser(user1);
-
-            return View("/Views/Home/Index.cshtml");
+            return View();
         }
+
+        [HttpPost]
+        public IActionResult AddUser(Usuario user) // binding automático entre el modelo y la entrada de datos a travez del campo name del form
+        {
+            // Instancia y llena el objeto Usuario del modelo Usuario dentro de DAO/Models manualmente
+            //Usuario user = new Usuario();
+            //user.Nombre = "Juan";
+            //user.Password = "1234";
+            //user.Email = "email@email.com";
+            //user.Perfil = 123;
+            //user.FechaRegistracion = DateTime.Now;
+
+            user.FechaRegistracion = DateTime.Now;
+            // Llama al servicio correspondiente para guardar el usuario
+            _testService.addUser(user);
+
+            return Redirect("/test");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Usuario user = _testService.getById(id);
+            _testService.deleteUser(user);
+            return Redirect("/test");
+        }
+
 
     }
 }
