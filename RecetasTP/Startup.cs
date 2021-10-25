@@ -1,9 +1,14 @@
+using DAO.Models;
+using DAO.Repositories;
+using DAO.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services;
+using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +28,13 @@ namespace RecetasTP
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            // Inyección de dependencias
+            services.AddTransient<_20212C_TPContext>();             // Cada vez que haya un request se creará e instanciara un contexto.
+            services.AddScoped<ITestRepository, TestRepository>();  // Cada vez que se use una clase que herede de IUserRepository se va a crear e instanciar un objeto de tipo UserRepository.
+            services.AddScoped<ITestService, TestService>();        // Cada vez que se use una clase que herede de IUserService se va a crear e instanciar un objeto de tipo TestService.
 
+
+            services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {

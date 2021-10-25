@@ -1,0 +1,29 @@
+﻿@model List<DAO.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Test Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Test</h1>
+
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Perfil</th>
+            <th>FechaRegistracion</th>
+        </tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Nombre</td>
+            <td>@user.Email</td>
+            <td>@user.Perfil</td>
+            <td>@user.FechaRegistracion.</td>
+        </tr>
+        <br /><br />
+    }
+    </table>
+
+</div>
