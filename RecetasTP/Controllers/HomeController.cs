@@ -21,6 +21,14 @@ namespace RecetasTP.Controllers
 
         public IActionResult Index()
         {
+            // Guardar variable en sesion
+            //HttpContext.Session.SetString("Nombre", "Ramiro Gimenez");
+            //HttpContext.Session.SetInt32("Edad", 27);
+
+            // Recuperar variable de sesion
+            //var nombre = HttpContext.Session.GetString("Nombre");
+            //var edad = HttpContext.Session.GetInt32("Edad");
+
             return View();
         }
 
