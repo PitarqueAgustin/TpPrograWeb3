@@ -14,5 +14,6 @@ namespace Services.Interfaces
         public void addUser(Usuario user);
         public Usuario getById(int id);
         public void deleteUser(Usuario user);
+        public void modifyUser(Usuario user);
     }
 }

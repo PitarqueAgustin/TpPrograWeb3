@@ -41,13 +41,13 @@ namespace RecetasTP.Controllers
         }
 
         [HttpGet]
-        public IActionResult NewUser()
+        public IActionResult New()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddUser(Usuario user) // binding automático entre el modelo y la entrada de datos a travez del campo name del form
+        public IActionResult Add(Usuario user) // binding automático entre el modelo y la entrada de datos a travez del campo name del form
         {
             // Instancia y llena el objeto Usuario del modelo Usuario dentro de DAO/Models manualmente
             //Usuario user = new Usuario();
@@ -58,6 +58,7 @@ namespace RecetasTP.Controllers
             //user.FechaRegistracion = DateTime.Now;
 
             user.FechaRegistracion = DateTime.Now;
+
             // Llama al servicio correspondiente para guardar el usuario
             _testService.addUser(user);
 
@@ -68,7 +69,33 @@ namespace RecetasTP.Controllers
         public IActionResult Delete(int id)
         {
             Usuario user = _testService.getById(id);
+            if (user == null)
+            {
+                throw new ArgumentException("Id inválido");
+            }
+
             _testService.deleteUser(user);
+            return Redirect("/test");
+        }
+
+        [HttpGet]
+        public IActionResult Modify(int id)
+        {
+            try
+            {
+                Usuario user = _testService.getById(id);
+                return View(user);
+            }
+            catch (ArgumentException)
+            {
+                return Redirect("/test");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Modify(Usuario user)
+        {
+            _testService.modifyUser(user);
             return Redirect("/test");
         }
 

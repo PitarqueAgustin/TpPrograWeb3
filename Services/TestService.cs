@@ -35,5 +35,23 @@ namespace Services
         {
             return _testRepo.getById(id);
         }
+
+        public void modifyUser(Usuario user)
+        {
+            Usuario userDB = _testRepo.getById(user.IdUsuario);
+
+            if (userDB == null)
+            {
+                throw new ArgumentException("Id inválido");
+            }
+
+            userDB.Nombre = user.Nombre;
+            userDB.Password = user.Password;
+            userDB.Email = user.Email;
+            userDB.Perfil = user.Perfil;
+            //userDB.FechaRegistracion= user.FechaRegistracion;
+
+            _testRepo.SaveChanges();
+        }
     }
 }

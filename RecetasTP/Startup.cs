@@ -39,7 +39,7 @@ namespace RecetasTP
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".TPWeb3.Session";
-                options.IdleTimeout = TimeSpan.FromSeconds(60);
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
             });
         }
 

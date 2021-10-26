@@ -1,0 +1,34 @@
+﻿@model DAO.Models.Usuario
+
+@{
+    ViewData["Title"] = $"Modificar usuario {Model.Nombre}";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Modificar usuario @Model.Nombre</h1>
+
+    <form action="/test/Modify" method="post">
+        <div>
+            <input type="hidden" name="IdUsuario" value="@Model.IdUsuario" />
+        </div>
+        <div>
+            Nombre: <input type="text" name="Nombre" value="@Model.Nombre" />
+        </div>
+        <div>
+            Email de tipo texto no copiar OJO: <input type="text" name="Email" value="@Model.Email" />
+        </div>
+        <div>
+            Password: <input type="password" name="Password" value="Model.Password" />
+        </div>
+        <div>
+            Perfil: <input type="number" name="Perfil" value="Model.Perfil" />
+        </div>
+        @*<div>
+            FechaRegistracion: <input type="datetime" name="date" value="" />
+        </div>*@
+        <div>
+            <input type="submit" name="Modify" value="Modify User" />
+        </div>
+
+    </form>
+</div>
