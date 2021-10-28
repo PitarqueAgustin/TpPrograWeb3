@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace Services.Interfaces
 {
-    public interface ITestService
+    public interface IUserService
     {
-        public List<Usuario> GetAll();
+        public List<Usuario> GetAllUsers();
         public void addUser(Usuario user);
-        public Usuario getById(int id);
+        public Usuario getUserById(int id);
         public void deleteUser(Usuario user);
         public void modifyUser(Usuario user);
+        public bool validateUser(string email, string password);
+        public Usuario getUserByEmail(string email);
     }
 }

@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace RecetasTP.Controllers
 {
-    public class TestController : Controller
+    public class UserController : Controller
     {
-        private ITestService _testService;
+        private IUserService _userService;
 
-        public TestController(ITestService testService)
+        public UserController(IUserService userService)
         {
-            _testService = testService;
+            _userService = userService;
         }
         
         public IActionResult Index()
@@ -24,9 +24,9 @@ namespace RecetasTP.Controllers
             // Inicializa todo lo necesario manualmente  para usar el servicio y el contexto.
             //_20212C_TPContext ctx = new _20212C_TPContext();
             //DAO.Repositories.UserRepository userRepo = new DAO.Repositories.UserRepository(ctx);
-            //TestService testService = new TestService(userRepo);
+            //UserService userService = new UserService(userRepo);
 
-            List<Usuario> users = _testService.GetAll();
+            List<Usuario> users = _userService.GetAllUsers();
 
             // Guardar variable en sesion
             HttpContext.Session.SetString("Nombre", "Ramiro Gimenez");
@@ -60,22 +60,22 @@ namespace RecetasTP.Controllers
             user.FechaRegistracion = DateTime.Now;
 
             // Llama al servicio correspondiente para guardar el usuario
-            _testService.addUser(user);
+            _userService.addUser(user);
 
-            return Redirect("/test");
+            return Redirect("/user");
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            Usuario user = _testService.getById(id);
+            Usuario user = _userService.getUserById(id);
             if (user == null)
             {
                 throw new ArgumentException("Id inválido");
             }
 
-            _testService.deleteUser(user);
-            return Redirect("/test");
+            _userService.deleteUser(user);
+            return Redirect("/user");
         }
 
         [HttpGet]
@@ -83,20 +83,20 @@ namespace RecetasTP.Controllers
         {
             try
             {
-                Usuario user = _testService.getById(id);
+                Usuario user = _userService.getUserById(id);
                 return View(user);
             }
             catch (ArgumentException)
             {
-                return Redirect("/test");
+                return Redirect("/user");
             }
         }
 
         [HttpPost]
         public IActionResult Modify(Usuario user)
         {
-            _testService.modifyUser(user);
-            return Redirect("/test");
+            _userService.modifyUser(user);
+            return Redirect("/user");
         }
 
 

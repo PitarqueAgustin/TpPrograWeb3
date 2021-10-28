@@ -4,6 +4,7 @@ using DAO.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,9 +30,14 @@ namespace RecetasTP
         public void ConfigureServices(IServiceCollection services)
         {
             // Inyección de dependencias
-            services.AddTransient<_20212C_TPContext>();             // Cada vez que haya un request se creará e instanciara un contexto.
-            services.AddScoped<ITestRepository, TestRepository>();  // Cada vez que se use una clase que herede de ITestRepository se va a crear e instanciar un objeto de tipo TestRepository.
-            services.AddScoped<ITestService, TestService>();        // Cada vez que se use una clase que herede de ITestService se va a crear e instanciar un objeto de tipo TestService.
+            //services.AddTransient<_20212C_TPContext>();             // Cada vez que haya un request se creará e instanciara un contexto.
+            services.AddDbContext<_20212C_TPContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("connString"));
+                });
+
+
+            services.AddScoped<IUserRepository, UserRepository>();  // Cada vez que se use una clase que herede de IUserRepository se va a crear e instanciar un objeto de tipo UserRepository.
+            services.AddScoped<IUserService, UserService>();        // Cada vez que se use una clase que herede de IUserService se va a crear e instanciar un objeto de tipo UserService.
 
 
             services.AddControllersWithViews();
