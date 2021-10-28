@@ -40,6 +40,7 @@ namespace RecetasTP.Controllers
         }
 
         [HttpGet]
+        //[HttpDelete]
         public IActionResult Delete(int id)
         {
             User user = _userService.getUserById(id);
@@ -67,6 +68,7 @@ namespace RecetasTP.Controllers
         }
 
         [HttpPost]
+        //[HttpPut]
         public IActionResult Modify(User user)
         {
             _userService.modifyUser(user);

@@ -1,12 +1,15 @@
 ﻿@model DAO.Entities.LoginModel
 
-@{ ViewData["Title"] = "Login Page"; }
+@{ 
+    Layout = "_Anonymous";
+    ViewData["Title"] = "Login Page";
+}
 
 <div class="row">
     @TempData["Mensaje"]
 </div>
 <br />
-<div class="row">
+<div class="row w-100">
     <div class="col-md-4">
         <form asp-action="Index" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger">
