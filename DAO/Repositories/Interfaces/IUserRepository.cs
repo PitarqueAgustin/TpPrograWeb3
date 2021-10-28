@@ -16,5 +16,6 @@ namespace DAO.Repositories.Interfaces
         public void DeleteUser(User user);
         public bool ValidateUSer(string email, string password);
         public User getUserByEmail(string email);
+        public bool isMailAvaiable(string mail);
     }
 }

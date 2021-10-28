@@ -1,26 +1,51 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DAO
+namespace DAO.Entities
 {
     public class UserMetadata
     {
-        public int UserId { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public int Rol { get; set; }
-        
         [Required]
-        public string Password2 { get; set; }
+        public int UserId { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        public string Password { get; set; }
+        [Required]
+        public int Rol { get; set; }
     }
 
-    public class RecetaMetadata
+    public class LoginMetadata
     {
-        // Insert data anotations here
-        // [Required]
-        // [StringLength(50)]
-        // Insert prop / method here
-        // public Nullable<String> Nombre;
+        //[Required(ErrorMessage = "Email obligatorio")]
+        //[EmailAddress]
+        //public string Email { get; set; }
+        //[Required(ErrorMessage = "Password obligatorio")]
+        //public string Password { get; set; }
     }
+
+    public class AddUserMetadata
+    {
+        //[Required]
+        //public string Name { get; set; }
+
+        //[EmailAddress]
+        //[Required(ErrorMessage = "Email obligatorio")]
+        //public string Email { get; set; }
+
+        //[Required(ErrorMessage = "Password obligatorio")]
+        //public string Password { get; set; }
+
+        //[Required(ErrorMessage = "ConfirmPassword obligatorio")]
+        //[Compare("Password")] 
+        //public string ConfirmPassword { get; set; }
+
+        //[Required(ErrorMessage = "Perfil obligatorio")]
+        //public int Rol { get; set; }
+
+    }
+
 }

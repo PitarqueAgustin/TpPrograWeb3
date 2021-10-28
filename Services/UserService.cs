@@ -21,9 +21,16 @@ namespace Services
             return _userRepo.GetAllUsers();
         }
 
-        public void addUser(User user)
+        public void addUser(AddUserModel userModel)
         {
-            _userRepo.AddNewUser(user);
+            User newUser = new User();
+            newUser.Name = userModel.Name;
+            newUser.Email = userModel.Email;
+            newUser.Password = userModel.Password;
+            newUser.Rol = userModel.Rol;
+            newUser.RegistrationDate = DateTime.Now;
+
+            _userRepo.AddNewUser(newUser);
         }
 
         public void deleteUser(User user)
@@ -62,6 +69,11 @@ namespace Services
         public User getUserByEmail(string email)
         {
             return _userRepo.getUserByEmail(email);
+        }
+
+        public bool isMailAvaiable(string mail)
+        {
+            return _userRepo.isMailAvaiable(mail);
         }
     }
 }

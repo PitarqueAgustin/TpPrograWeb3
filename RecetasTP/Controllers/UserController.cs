@@ -32,14 +32,21 @@ namespace RecetasTP.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(User user) // binding automático entre el modelo y la entrada de datos a travez del campo name del form
+        public IActionResult Add(AddUserModel userModel) // binding automático entre el modelo y la entrada de datos a travez del campo name del form
         {
-            user.RegistrationDate = DateTime.Now;
-            _userService.addUser(user);
-            return Redirect("/user");
+            if (_userService.isMailAvaiable(userModel.Email))
+            {
+                _userService.addUser(userModel);
+                return Redirect("/user");
+            }
+            
+            ModelState.AddModelError(string.Empty, "El mail ingresado no está disponible");
+            return View(userModel);
         }
 
-        [HttpGet]
+        //[HttpGet]
+        [HttpDelete]
+        [Route("User/Delete/{id}")]
         public IActionResult Delete(int id)
         {
             User user = _userService.getUserById(id);
@@ -52,6 +59,7 @@ namespace RecetasTP.Controllers
             return Redirect("/user");
         }
 
+        //[HttpPut]
         [HttpGet]
         public IActionResult Modify(int id)
         {

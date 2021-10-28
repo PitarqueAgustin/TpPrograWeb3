@@ -33,7 +33,7 @@ namespace RecetasTP.Controllers
                 {
                     var user = _userService.getUserByEmail(model.Email);
                     HttpContext.Session.SetInt32("userId", user.UserId);
-                    var value = $"Bienvenido, {user.Name}" + HttpContext.Session.GetInt32("userId");
+                    var value = $"Bienvenido, {user.Name}";
                     TempData["value"] = value;
 
                     return RedirectToAction("Index", "Home", value);

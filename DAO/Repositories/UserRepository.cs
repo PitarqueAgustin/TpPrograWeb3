@@ -56,5 +56,12 @@ namespace DAO.Repositories
         {
             return _ctx.Users.First(u => u.Email == email);
         }
+
+        public bool isMailAvaiable(string mail)
+        {
+            bool mailRegistered = _ctx.Users.FirstOrDefault(u=> u.Email == mail) != null;
+            return !mailRegistered;
+
+        }
     }
 }
