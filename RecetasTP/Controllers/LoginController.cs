@@ -1,11 +1,11 @@
-﻿using DAO.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using DAO.Entities;
 
 namespace RecetasTP.Controllers
 {
@@ -31,9 +31,9 @@ namespace RecetasTP.Controllers
             {
                 if (_userService.validateUser(model.Email, model.Password))
                 {
-                    var usuario = _userService.getUserByEmail(model.Email);
-                    HttpContext.Session.SetInt32("userId", usuario.IdUsuario);
-                    var value = $"Bienvenido, {usuario.Nombre }" + HttpContext.Session.GetInt32("userId");
+                    var user = _userService.getUserByEmail(model.Email);
+                    HttpContext.Session.SetInt32("userId", user.UserId);
+                    var value = $"Bienvenido, {user.Name}" + HttpContext.Session.GetInt32("userId");
                     TempData["value"] = value;
 
                     return RedirectToAction("Index", "Home", value);

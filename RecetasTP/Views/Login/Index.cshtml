@@ -1,4 +1,4 @@
-﻿@model DAO.Models.LoginModel
+﻿@model DAO.Entities.LoginModel
 
 @{ ViewData["Title"] = "Login Page"; }
 
@@ -30,7 +30,7 @@
 </div>
 
 <div>
-    <a asp-action="Registrar" asp-controller="Usuarios">No estas registrado?</a>
+    <a asp-action="Register" asp-controller="User">No estas registrado?</a>
 </div>
 
 @section Scripts 

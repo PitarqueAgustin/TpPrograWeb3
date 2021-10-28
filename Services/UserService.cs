@@ -1,4 +1,4 @@
-﻿using DAO.Models;
+﻿using DAO.Entities;
 using DAO.Repositories;
 using DAO.Repositories.Interfaces;
 using Services.Interfaces;
@@ -16,39 +16,39 @@ namespace Services
             _userRepo = userRepo;
         }
 
-        public List<Usuario> GetAllUsers()
+        public List<User> GetAllUsers()
         {
             return _userRepo.GetAllUsers();
         }
 
-        public void addUser(Usuario user)
+        public void addUser(User user)
         {
             _userRepo.AddNewUser(user);
         }
 
-        public void deleteUser(Usuario user)
+        public void deleteUser(User user)
         {
             _userRepo.DeleteUser(user);
         }
 
-        public Usuario getUserById(int id)
+        public User getUserById(int id)
         {
             return _userRepo.getUserById(id);
         }
 
-        public void modifyUser(Usuario user)
+        public void modifyUser(User user)
         {
-            Usuario userDB = _userRepo.getUserById(user.IdUsuario);
+            User userDB = _userRepo.getUserById(user.UserId);
 
             if (userDB == null)
             {
                 throw new ArgumentException("Id inválido");
             }
 
-            userDB.Nombre = user.Nombre;
+            userDB.Name = user.Name;
             userDB.Password = user.Password;
             userDB.Email = user.Email;
-            userDB.Perfil = user.Perfil;
+            userDB.Rol = user.Rol;
             //userDB.FechaRegistracion= user.FechaRegistracion;
 
             _userRepo.SaveChanges();
@@ -59,7 +59,7 @@ namespace Services
             return _userRepo.ValidateUSer(email, password);
         }
 
-        public Usuario getUserByEmail(string email)
+        public User getUserByEmail(string email)
         {
             return _userRepo.getUserByEmail(email);
         }

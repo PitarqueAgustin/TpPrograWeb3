@@ -1,4 +1,4 @@
-﻿using DAO.Models;
+﻿using DAO.Entities;
 using DAO.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,15 +17,15 @@ namespace DAO.Repositories
             _ctx = ctx;
         }
 
-        public List<Usuario> GetAllUsers()
+        public List<User> GetAllUsers()
         {
-            return _ctx.Usuarios.OrderBy(o => o.Nombre).ToList();
+            return _ctx.Users.OrderBy(o => o.Name).ToList();
         }
 
-        public void AddNewUser(Usuario user)
+        public void AddNewUser(User user)
         {
             // Agrega al contexto el user
-            _ctx.Usuarios.Add(user);
+            _ctx.Users.Add(user);
             
             // Guarda en la DB el contexto
             SaveChanges();
@@ -36,25 +36,25 @@ namespace DAO.Repositories
             _ctx.SaveChanges();
         }
 
-        public Usuario getUserById(int id)
+        public User getUserById(int id)
         {
-            return _ctx.Usuarios.Find(id);
+            return _ctx.Users.Find(id);
         }
 
-        public void DeleteUser(Usuario user)
+        public void DeleteUser(User user)
         {
-            _ctx.Usuarios.Remove(user);
+            _ctx.Users.Remove(user);
             SaveChanges();
         }
 
         public bool ValidateUSer(string email, string password)
         {
-            return _ctx.Usuarios.FirstOrDefault(u => u.Email == email && u.Password == password) != null;
+            return _ctx.Users.FirstOrDefault(u => u.Email == email && u.Password == password) != null;
         }
 
-        public Usuario getUserByEmail(string email)
+        public User getUserByEmail(string email)
         {
-            return _ctx.Usuarios.First(u => u.Email == email);
+            return _ctx.Users.First(u => u.Email == email);
         }
     }
 }

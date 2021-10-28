@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 using RecetasTP.Models;
 using System.Diagnostics;
-using DAO.Models;
 
 namespace RecetasTP.Controllers
 {

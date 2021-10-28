@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DAO.Models
+namespace DAO.Entities
 {
     [MetadataType(typeof(UserMetadata))]
-    public partial class Usuario
+    public partial class User
     {
         // public string Password2 { get; set; }
     }

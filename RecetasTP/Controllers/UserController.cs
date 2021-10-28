@@ -1,4 +1,4 @@
-﻿using DAO.Models;
+﻿using DAO.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -21,7 +21,7 @@ namespace RecetasTP.Controllers
         
         public IActionResult Index()
         {
-            List<Usuario> users = _userService.GetAllUsers();
+            List<User> users = _userService.GetAllUsers();
             return View(users);
         }
 
@@ -32,9 +32,9 @@ namespace RecetasTP.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Usuario user) // binding automático entre el modelo y la entrada de datos a travez del campo name del form
+        public IActionResult Add(User user) // binding automático entre el modelo y la entrada de datos a travez del campo name del form
         {
-            user.FechaRegistracion = DateTime.Now;
+            user.RegistrationDate = DateTime.Now;
             _userService.addUser(user);
             return Redirect("/user");
         }
@@ -42,7 +42,7 @@ namespace RecetasTP.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            Usuario user = _userService.getUserById(id);
+            User user = _userService.getUserById(id);
             if (user == null)
             {
                 throw new ArgumentException("Id inválido");
@@ -57,7 +57,7 @@ namespace RecetasTP.Controllers
         {
             try
             {
-                Usuario user = _userService.getUserById(id);
+                User user = _userService.getUserById(id);
                 return View(user);
             }
             catch (ArgumentException)
@@ -67,7 +67,7 @@ namespace RecetasTP.Controllers
         }
 
         [HttpPost]
-        public IActionResult Modify(Usuario user)
+        public IActionResult Modify(User user)
         {
             _userService.modifyUser(user);
             return Redirect("/user");

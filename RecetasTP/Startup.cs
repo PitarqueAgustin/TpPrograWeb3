@@ -1,4 +1,4 @@
-using DAO.Models;
+using DAO.Entities;
 using DAO.Repositories;
 using DAO.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;

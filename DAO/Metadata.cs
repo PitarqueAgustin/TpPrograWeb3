@@ -5,11 +5,11 @@ namespace DAO
 {
     public class UserMetadata
     {
-        public int IdUsuario { get; set; }
-        public string Nombre { get; set; }
+        public int UserId { get; set; }
+        public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int Perfil { get; set; }
+        public int Rol { get; set; }
         
         [Required]
         public string Password2 { get; set; }

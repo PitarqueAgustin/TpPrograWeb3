@@ -1,4 +1,4 @@
-﻿@model DAO.Models.Usuario
+﻿@model DAO.Entities.User
 
 @{
     ViewData["Title"] = "Agregar usuario";
@@ -9,7 +9,7 @@
 
     <form action="/user/Add" method="post">
         <div>
-            Nombre: <input type="text" name="Nombre" value="" />
+            Nombre: <input type="text" name="Name" value="" />
         </div>
         <div>
             Email de tipo texto no copiar OJO: <input type="text" name="Email" value="" />
@@ -18,7 +18,7 @@
             Password: <input type="password" name="Password" value="" />
         </div>
         <div>
-            Perfil: <input type="number" name="Perfil" value="" />
+            Perfil: <input type="number" name="Rol" value="" />
         </div>
         @*<div>
                 FechaRegistracion: <input type="datetime" name="date" value="" />

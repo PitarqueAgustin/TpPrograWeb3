@@ -1,4 +1,4 @@
-﻿using DAO.Models;
+﻿using DAO.Entities;
 using DAO.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,12 +10,12 @@ namespace Services.Interfaces
 {
     public interface IUserService
     {
-        public List<Usuario> GetAllUsers();
-        public void addUser(Usuario user);
-        public Usuario getUserById(int id);
-        public void deleteUser(Usuario user);
-        public void modifyUser(Usuario user);
+        public List<User> GetAllUsers();
+        public void addUser(User user);
+        public User getUserById(int id);
+        public void deleteUser(User user);
+        public void modifyUser(User user);
         public bool validateUser(string email, string password);
-        public Usuario getUserByEmail(string email);
+        public User getUserByEmail(string email);
     }
 }
