@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RecetasTP.Filters;
 using RecetasTP.Models;
+using Services.Interfaces;
+using System;
 using System.Diagnostics;
 
 namespace RecetasTP.Controllers
 {
+    [LayoutActionFilter]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -16,6 +21,7 @@ namespace RecetasTP.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
             return View();
         }
 
