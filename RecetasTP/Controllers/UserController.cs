@@ -33,6 +33,7 @@ namespace RecetasTP.Controllers
         }
 
         [HttpPost()]
+        [Route("register")]
         public IActionResult Add(AddUserModel userModel) // binding automático entre el modelo y la entrada de datos a travez del campo name del form
         {
             if (_userService.isMailAvaiable(userModel.Email))
