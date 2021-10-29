@@ -4,6 +4,7 @@ using DAO.Repositories.Interfaces;
 using Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Services
 {
@@ -74,6 +75,13 @@ namespace Services
         public bool isMailAvaiable(string mail)
         {
             return _userRepo.isMailAvaiable(mail);
+        }
+
+        public bool isValidPassword(string pass)
+        {
+            Regex regex = new Regex(@"^([A-Z])(?=.*\d)(?=.*[a - zA - Z]).{7,}$");
+            bool isValidated = regex.IsMatch(pass);
+            return isValidated;
         }
     }
 }
