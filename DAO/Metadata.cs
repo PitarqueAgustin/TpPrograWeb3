@@ -48,4 +48,9 @@ namespace DAO.Entities
 
     }
 
+    public class AddRecipeMetadata 
+    {
+    
+    }
+
 }

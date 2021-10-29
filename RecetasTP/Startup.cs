@@ -39,6 +39,9 @@ namespace RecetasTP
             services.AddScoped<IUserRepository, UserRepository>();  // Cada vez que se use una clase que herede de IUserRepository se va a crear e instanciar un objeto de tipo UserRepository.
             services.AddScoped<IUserService, UserService>();        // Cada vez que se use una clase que herede de IUserService se va a crear e instanciar un objeto de tipo UserService.
 
+            services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IRecipeService, RecipeService>();
+
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
             services.AddSession(options =>

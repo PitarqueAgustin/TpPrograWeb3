@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DAO.Entities
@@ -17,7 +18,7 @@ namespace DAO.Entities
         [Required(ErrorMessage = "Password obligatorio")]
         public string Password { get; set; }
     }
-    
+
     [MetadataType(typeof(AddUserMetadata))]
     public partial class AddUserModel
     {
@@ -33,5 +34,18 @@ namespace DAO.Entities
         public string ConfirmPassword { get; set; }
         [Required(ErrorMessage = "Perfil obligatorio")]
         public int Rol { get; set; }
+    }
+
+    [MetadataType(typeof(AddRecipeMetadata))]
+    public partial class AddRecipeModel 
+    {
+        [Required]
+        public int ChefId { get; set; }
+        [Required(ErrorMessage = "Nombre obligatorio")]
+        public string Name { get; set; }
+        public int CookingTime { get; set; }
+        public string Description { get; set; }
+        public string Ingredients { get; set; }
+        public int RecipeTypeId { get; set; }
     }
 }
