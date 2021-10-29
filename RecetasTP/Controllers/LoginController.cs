@@ -37,7 +37,7 @@ namespace RecetasTP.Controllers
                     var value = $"Bienvenido, {user.Name}";
                     TempData["value"] = value;
 
-                    return RedirectToAction("Index", "Home", value);
+                    return RedirectToAction("Index", "Default", value);
                 }
 
                 ModelState.AddModelError(string.Empty, "Usuario no valido");

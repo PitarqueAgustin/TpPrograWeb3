@@ -26,7 +26,7 @@ namespace RecetasTP.Controllers
         }
 
         [HttpGet]
-        //[Route("register")]
+        [Route("register")]
         public IActionResult Add()
         {
             return View();
