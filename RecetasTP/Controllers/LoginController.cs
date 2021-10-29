@@ -6,9 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using DAO.Entities;
+using RecetasTP.Filters;
 
 namespace RecetasTP.Controllers
 {
+    [LayoutActionFilter]
     public class LoginController : Controller
     {
         private IUserService _userService;
@@ -21,6 +23,7 @@ namespace RecetasTP.Controllers
 
         public IActionResult Index ()
         {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
             return View();
         }
         

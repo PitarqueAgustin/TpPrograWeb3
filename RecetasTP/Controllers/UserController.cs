@@ -1,6 +1,7 @@
 ﻿using DAO.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RecetasTP.Filters;
 using Services;
 using Services.Interfaces;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace RecetasTP.Controllers
 {
+    [LayoutActionFilter]
     public class UserController : Controller
     {
         private IUserService _userService;
@@ -21,6 +23,7 @@ namespace RecetasTP.Controllers
         
         public IActionResult Index()
         {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
             List<User> users = _userService.GetAll();
             return View(users);
         }
@@ -29,6 +32,7 @@ namespace RecetasTP.Controllers
         [Route("register")]
         public IActionResult Add()
         {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
             return View();
         }
 
@@ -70,6 +74,7 @@ namespace RecetasTP.Controllers
         [HttpGet]
         public IActionResult Modify(int id)
         {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
             try
             {
                 User user = _userService.GetById(id);
