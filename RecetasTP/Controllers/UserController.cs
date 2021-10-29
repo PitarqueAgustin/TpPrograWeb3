@@ -21,7 +21,7 @@ namespace RecetasTP.Controllers
         
         public IActionResult Index()
         {
-            List<User> users = _userService.GetAllUsers();
+            List<User> users = _userService.GetAll();
             return View(users);
         }
 
@@ -38,9 +38,9 @@ namespace RecetasTP.Controllers
         {
             if (_userService.IsValidPassword(userModel.Password))
             {
-                if (_userService.IsMailAvaiable(userModel.Email))
+                if (_userService.IsMailAvailable(userModel.Email))
                 {
-                    _userService.AddUser(userModel);
+                    _userService.Add(userModel);
                     return Redirect("/user");
                 }
                 ModelState.AddModelError(string.Empty, "El mail ingresado no está disponible");
@@ -56,13 +56,13 @@ namespace RecetasTP.Controllers
         // [Route("User/Delete/{id}")]
         public IActionResult Delete(int id)
         {
-            User user = _userService.GetUserById(id);
+            User user = _userService.GetById(id);
             if (user == null)
             {
                 throw new ArgumentException("Id inválido");
             }
 
-            _userService.DeleteUser(user);
+            _userService.Delete(user);
             return Redirect("/user");
         }
 
@@ -72,7 +72,7 @@ namespace RecetasTP.Controllers
         {
             try
             {
-                User user = _userService.GetUserById(id);
+                User user = _userService.GetById(id);
                 return View(user);
             }
             catch (ArgumentException)
@@ -85,7 +85,7 @@ namespace RecetasTP.Controllers
         //[HttpPut]
         public IActionResult Modify(User user)
         {
-            _userService.ModifyUser(user);
+            _userService.Modify(user);
             return Redirect("/user");
         }
 

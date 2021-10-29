@@ -9,13 +9,13 @@ namespace DAO.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        public List<User> GetAllUsers();
-        public void AddNewUser(User user);
+        public List<User> GetAll();
+        public void Add(User user);
         public void SaveChanges();
-        public User GetUserById(int id);
-        public void DeleteUser(User user);
-        public bool ValidateUSer(string email, string password);
-        public User GetUserByEmail(string email);
-        public bool IsMailAvaiable(string mail);
+        public User GetById(int id);
+        public void Delete(User user);
+        public bool Validate(string email, string password);
+        public User GetByEmail(string email);
+        public bool IsMailAvailable(string mail);
     }
 }

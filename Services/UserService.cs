@@ -19,12 +19,12 @@ namespace Services
             _userRepo = userRepo;
         }
 
-        public List<User> GetAllUsers()
+        public List<User> GetAll()
         {
-            return _userRepo.GetAllUsers();
+            return _userRepo.GetAll();
         }
 
-        public void AddUser(AddUserModel userModel)
+        public void Add(AddUserModel userModel)
         {
             User newUser = new User();
             newUser.Name = userModel.Name;
@@ -33,22 +33,22 @@ namespace Services
             newUser.Rol = userModel.Rol;
             newUser.RegistrationDate = DateTime.Now;
 
-            _userRepo.AddNewUser(newUser);
+            _userRepo.Add(newUser);
         }
 
-        public void DeleteUser(User user)
+        public void Delete(User user)
         {
-            _userRepo.DeleteUser(user);
+            _userRepo.Delete(user);
         }
 
-        public User GetUserById(int id)
+        public User GetById(int id)
         {
-            return _userRepo.GetUserById(id);
+            return _userRepo.GetById(id);
         }
 
-        public void ModifyUser(User user)
+        public void Modify(User user)
         {
-            User userDB = _userRepo.GetUserById(user.UserId);
+            User userDB = _userRepo.GetById(user.UserId);
 
             if (userDB == null)
             {
@@ -64,20 +64,20 @@ namespace Services
             _userRepo.SaveChanges();
         }
 
-        public bool ValidateUser(string email, string password)
+        public bool Validate(string email, string password)
         {
             password = CreateMD5(password);
-            return _userRepo.ValidateUSer(email, password);
+            return _userRepo.Validate(email, password);
         }
 
-        public User GetUserByEmail(string email)
+        public User GetByEmail(string email)
         {
-            return _userRepo.GetUserByEmail(email);
+            return _userRepo.GetByEmail(email);
         }
 
-        public bool IsMailAvaiable(string mail)
+        public bool IsMailAvailable(string mail)
         {
-            return _userRepo.IsMailAvaiable(mail);
+            return _userRepo.IsMailAvailable(mail);
         }
 
         public bool IsValidPassword(string pass)
