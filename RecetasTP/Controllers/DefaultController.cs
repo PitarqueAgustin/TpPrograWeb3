@@ -10,16 +10,22 @@ using System.Diagnostics;
 namespace RecetasTP.Controllers
 {
     [LayoutActionFilter]
-    public class HomeController : Controller
+    public class DefaultController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<DefaultController> _logger;
         
-        public HomeController(ILogger<HomeController> logger)
+        public DefaultController(ILogger<DefaultController> logger)
         {
             _logger = logger;
         }
 
         public IActionResult Index()
+        {
+            return RedirectToAction("default");
+        }
+
+        [Route("default")]
+        public IActionResult Default()
         {
             ViewBag.Layout = HttpContext.Session.GetString("layout");
             return View();
@@ -29,6 +35,7 @@ namespace RecetasTP.Controllers
         {
             return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

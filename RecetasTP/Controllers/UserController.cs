@@ -21,7 +21,7 @@ namespace RecetasTP.Controllers
         
         public IActionResult Index()
         {
-            List<User> users = _userService.GetAllUsers();
+            List<User> users = _userService.GetAll();
             return View(users);
         }
 
@@ -36,11 +36,11 @@ namespace RecetasTP.Controllers
         [Route("register")]
         public IActionResult Add(AddUserModel userModel) // binding automático entre el modelo y la entrada de datos a travez del campo name del form
         {
-            if (_userService.isValidPassword(userModel.Password))
+            if (_userService.IsValidPassword(userModel.Password))
             {
-                if (_userService.isMailAvaiable(userModel.Email))
+                if (_userService.IsMailAvailable(userModel.Email))
                 {
-                    _userService.addUser(userModel);
+                    _userService.Add(userModel);
                     return Redirect("/user");
                 }
                 ModelState.AddModelError(string.Empty, "El mail ingresado no está disponible");
@@ -56,13 +56,13 @@ namespace RecetasTP.Controllers
         // [Route("User/Delete/{id}")]
         public IActionResult Delete(int id)
         {
-            User user = _userService.getUserById(id);
+            User user = _userService.GetById(id);
             if (user == null)
             {
                 throw new ArgumentException("Id inválido");
             }
 
-            _userService.deleteUser(user);
+            _userService.Delete(user);
             return Redirect("/user");
         }
 
@@ -72,7 +72,7 @@ namespace RecetasTP.Controllers
         {
             try
             {
-                User user = _userService.getUserById(id);
+                User user = _userService.GetById(id);
                 return View(user);
             }
             catch (ArgumentException)
@@ -85,7 +85,7 @@ namespace RecetasTP.Controllers
         //[HttpPut]
         public IActionResult Modify(User user)
         {
-            _userService.modifyUser(user);
+            _userService.Modify(user);
             return Redirect("/user");
         }
 

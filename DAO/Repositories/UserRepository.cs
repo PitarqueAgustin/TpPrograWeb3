@@ -17,12 +17,12 @@ namespace DAO.Repositories
             _ctx = ctx;
         }
 
-        public List<User> GetAllUsers()
+        public List<User> GetAll()
         {
             return _ctx.Users.OrderBy(o => o.Name).ToList();
         }
 
-        public void AddNewUser(User user)
+        public void Add(User user)
         {
             // Agrega al contexto el user
             _ctx.Users.Add(user);
@@ -36,28 +36,28 @@ namespace DAO.Repositories
             _ctx.SaveChanges();
         }
 
-        public User getUserById(int id)
+        public User GetById(int id)
         {
             return _ctx.Users.Find(id);
         }
 
-        public void DeleteUser(User user)
+        public void Delete(User user)
         {
             _ctx.Users.Remove(user);
             SaveChanges();
         }
 
-        public bool ValidateUSer(string email, string password)
+        public bool Validate(string email, string password)
         {
             return _ctx.Users.FirstOrDefault(u => u.Email == email && u.Password == password) != null;
         }
 
-        public User getUserByEmail(string email)
+        public User GetByEmail(string email)
         {
             return _ctx.Users.First(u => u.Email == email);
         }
 
-        public bool isMailAvaiable(string mail)
+        public bool IsMailAvailable(string mail)
         {
             bool mailRegistered = _ctx.Users.FirstOrDefault(u=> u.Email == mail) != null;
             return !mailRegistered;
