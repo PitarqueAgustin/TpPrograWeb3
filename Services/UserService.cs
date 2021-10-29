@@ -24,7 +24,7 @@ namespace Services
             return _userRepo.GetAllUsers();
         }
 
-        public void addUser(AddUserModel userModel)
+        public void AddUser(AddUserModel userModel)
         {
             User newUser = new User();
             newUser.Name = userModel.Name;
@@ -36,19 +36,19 @@ namespace Services
             _userRepo.AddNewUser(newUser);
         }
 
-        public void deleteUser(User user)
+        public void DeleteUser(User user)
         {
             _userRepo.DeleteUser(user);
         }
 
-        public User getUserById(int id)
+        public User GetUserById(int id)
         {
-            return _userRepo.getUserById(id);
+            return _userRepo.GetUserById(id);
         }
 
-        public void modifyUser(User user)
+        public void ModifyUser(User user)
         {
-            User userDB = _userRepo.getUserById(user.UserId);
+            User userDB = _userRepo.GetUserById(user.UserId);
 
             if (userDB == null)
             {
@@ -64,23 +64,23 @@ namespace Services
             _userRepo.SaveChanges();
         }
 
-        public bool validateUser(string email, string password)
+        public bool ValidateUser(string email, string password)
         {
             password = CreateMD5(password);
             return _userRepo.ValidateUSer(email, password);
         }
 
-        public User getUserByEmail(string email)
+        public User GetUserByEmail(string email)
         {
-            return _userRepo.getUserByEmail(email);
+            return _userRepo.GetUserByEmail(email);
         }
 
-        public bool isMailAvaiable(string mail)
+        public bool IsMailAvaiable(string mail)
         {
-            return _userRepo.isMailAvaiable(mail);
+            return _userRepo.IsMailAvaiable(mail);
         }
 
-        public bool isValidPassword(string pass)
+        public bool IsValidPassword(string pass)
         {
             Regex regex = new Regex(@"^([A-Z])(?=.*\d)(?=.*[a - zA - Z]).{7,}$");
             bool isValidated = regex.IsMatch(pass);

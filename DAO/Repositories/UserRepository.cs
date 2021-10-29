@@ -36,7 +36,7 @@ namespace DAO.Repositories
             _ctx.SaveChanges();
         }
 
-        public User getUserById(int id)
+        public User GetUserById(int id)
         {
             return _ctx.Users.Find(id);
         }
@@ -52,12 +52,12 @@ namespace DAO.Repositories
             return _ctx.Users.FirstOrDefault(u => u.Email == email && u.Password == password) != null;
         }
 
-        public User getUserByEmail(string email)
+        public User GetUserByEmail(string email)
         {
             return _ctx.Users.First(u => u.Email == email);
         }
 
-        public bool isMailAvaiable(string mail)
+        public bool IsMailAvaiable(string mail)
         {
             bool mailRegistered = _ctx.Users.FirstOrDefault(u=> u.Email == mail) != null;
             return !mailRegistered;
