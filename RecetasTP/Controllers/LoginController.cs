@@ -34,10 +34,9 @@ namespace RecetasTP.Controllers
                     var user = _userService.GetUserByEmail(model.Email);
                     HttpContext.Session.SetInt32("userId", user.UserId);
                     HttpContext.Session.SetInt32("roleId", user.Rol);
-                    var value = $"Bienvenido, {user.Name}";
-                    TempData["value"] = value;
+                    TempData["value"] = $"Bienvenido, {user.Name}";
 
-                    return RedirectToAction("Index", "Default", value);
+                    return RedirectToAction("Index", "Default");
                 }
 
                 ModelState.AddModelError(string.Empty, "Usuario no valido");
@@ -45,6 +44,14 @@ namespace RecetasTP.Controllers
             }
 
             return View();
+        }
+
+        [HttpGet]
+        [Route("logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Default");
         }
     }
 }
