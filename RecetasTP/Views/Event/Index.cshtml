@@ -1,15 +1,13 @@
 ﻿@model DAO.Entities.AddEventModel
 
-
 @{
     Layout = "_Anonymous";
     ViewData["Title"] = "Login Page";
 }
 
 <div class="row">
-    @*@TempData["Message"]*@
+    @TempData["Message"]
 </div>
-<br />
 
 <div class="row w-100">
     <div class="col-md-8">
@@ -18,7 +16,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Nombre</label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" type="text" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -28,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Date" class="control-label">Fecha</label>
-                <input asp-for="Date" class="form-control" type="datetime-local" id="date" name="Date"/>
+                <input asp-for="Date" class="form-control" type="datetime-local" id="date" name="Date" />
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,8 +49,6 @@
                 <input asp-for="Picture" class="form-control" type="file" name="image" />
                 <span asp-validation-for="Picture" class="text-danger"></span>
             </div>
-
-
             <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-primary" />
             </div>

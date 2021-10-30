@@ -28,9 +28,15 @@ namespace RecetasTP.Controllers
         [HttpPost]
         public IActionResult Add(AddEventModel e, IFormFile image)
         {
-            e.ChefId = (int)HttpContext.Session.GetInt32("userId");
-            _eventService.Add(e, image);
-            return View();
+            if (ModelState.IsValid)
+            {
+                e.ChefId = (int)HttpContext.Session.GetInt32("userId");
+                _eventService.Add(e, image);
+                return View();
+            }
+            
+            ModelState.AddModelError(string.Empty, "Error en el form");
+            return View("Index", e);
         }
 
     }

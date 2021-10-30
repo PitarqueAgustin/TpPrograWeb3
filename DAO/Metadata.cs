@@ -20,26 +20,26 @@ namespace DAO.Entities
 
     public class LoginMetadata
     {
-        [Required(ErrorMessage = "Email obligatorio")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         [EmailAddress]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Password obligatorio")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Password { get; set; }
     }
 
     public class AddUserMetadata
     {
-        [Required(ErrorMessage = "Nombre obligatorio")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Name { get; set; }
         [EmailAddress]
-        [Required(ErrorMessage = "Email obligatorio")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Password obligatorio")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Password { get; set; }
         [Compare("Password", ErrorMessage = "Los passwords no son iguales")]
-        [Required(ErrorMessage = "Password obligatorio")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string ConfirmPassword { get; set; }
-        [Required(ErrorMessage = "Perfil obligatorio")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int Rol { get; set; }
     }
 
@@ -47,18 +47,23 @@ namespace DAO.Entities
     {
         [Required]
         public int ChefId { get; set; }
-        [Required(ErrorMessage = "Nombre obligatorio")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Name { get; set; }
     }
 
     public class AddEventMetadata
     {
-        [Required(ErrorMessage = "Nombre obligatorio")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Description { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public DateTime Date { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int DinersAmount { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Location { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public decimal Price { get; set; }
     }
 

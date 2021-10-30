@@ -40,15 +40,18 @@ namespace RecetasTP.Controllers
         [Route("register")]
         public IActionResult Add(AddUserModel userModel) // binding automático entre el modelo y la entrada de datos a travez del campo name del form
         {
-            if (_userService.IsValidPassword(userModel.Password))
+            if (ModelState.IsValid)
             {
-                if (_userService.IsMailAvailable(userModel.Email))
+                if (_userService.IsValidPassword(userModel.Password))
                 {
-                    _userService.Add(userModel);
-                    return Redirect("/user");
+                    if (_userService.IsMailAvailable(userModel.Email))
+                    {
+                        _userService.Add(userModel);
+                        return Redirect("/user");
+                    }
+                    ModelState.AddModelError(string.Empty, "El mail ingresado no está disponible");
+                    return View(userModel);
                 }
-                ModelState.AddModelError(string.Empty, "El mail ingresado no está disponible");
-                return View(userModel);
             }
             
             ModelState.AddModelError(string.Empty, "Password no cumple con expresión regular");
