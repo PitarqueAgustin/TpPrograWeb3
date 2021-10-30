@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     Layout = ViewBag.Layout;
     ViewData["Title"] = "Default Page";
 }
@@ -10,8 +10,23 @@
     <div class="row">
         @TempData["value"]
     </div>
-</div>
 
-@section Scripts
+    <div class="events">
+        @foreach (var e in ViewBag.ImageList)
+           {
+        <div class="event">
+            <div class="event-thumb-container">
+                <img src="~/img/@e" alt="thumbnail" class="event-thumbnail" />
+            </div>
+            <div class="event-description">
+                <p class="event-name">Evento 1</p>
+                <p class="event-name">$ 1500</p>
+                <p class="event-rating">Rating: 4.3</p>
+            </div>
+        </div>
+    }
+    </div>
+
+    @section Scripts
 {
-}
+    }
