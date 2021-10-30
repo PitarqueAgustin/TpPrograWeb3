@@ -42,6 +42,10 @@ namespace RecetasTP
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IRecipeService, RecipeService>();
 
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IEventService, EventService>();
+
+
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
             services.AddSession(options =>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +18,7 @@ namespace DAO.Entities
         public string Password { get; set; }
     }
 
-    [MetadataType(typeof(AddUserMetadata))]
+    [ModelMetadataType(typeof(AddUserMetadata))]
     public partial class AddUserModel
     {
         public string Name { get; set; }
@@ -27,16 +28,27 @@ namespace DAO.Entities
         public int Rol { get; set; }
     }
 
-    [MetadataType(typeof(AddRecipeMetadata))]
+    [ModelMetadataType(typeof(AddRecipeMetadata))]
     public partial class AddRecipeModel 
     {
-        [Required]
         public int ChefId { get; set; }
-        [Required(ErrorMessage = "Nombre obligatorio")]
         public string Name { get; set; }
         public int CookingTime { get; set; }
         public string Description { get; set; }
         public string Ingredients { get; set; }
         public int RecipeTypeId { get; set; }
+    }
+
+    [ModelMetadataType(typeof(AddEventMetadata))]
+    public partial class AddEventModel
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime Date { get; set; }
+        public int DinersAmount { get; set; }
+        public string Location { get; set; }
+        public decimal Price { get; set; }
+        public int ChefId { get; set; }
+        public IFormFile Picture { get; set; }
     }
 }

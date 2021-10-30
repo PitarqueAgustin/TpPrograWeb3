@@ -102,6 +102,7 @@ CREATE TABLE [dbo].[Events](
 	[EventId] [int] IDENTITY(1,1) NOT NULL,
 	[ChefId] [int] NOT NULL,
 	[Name] [nvarchar](50) NOT NULL,
+	[Description] [nvarchar](200) NOT NULL,
 	[Date] [datetime] NOT NULL,
 	[DinersAmount] [int] NOT NULL,
 	[Location] [nvarchar](50) NOT NULL,
@@ -114,6 +115,7 @@ CREATE TABLE [dbo].[Events](
 	[ModifiedBy] [nvarchar](50),
 	[DeletedDate] [datetime],
 	[DeletedBy] [nvarchar](50),
+
  CONSTRAINT [PK_Events] PRIMARY KEY CLUSTERED 
 (
 	[EventId] ASC

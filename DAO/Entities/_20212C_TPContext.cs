@@ -29,8 +29,6 @@ namespace DAO.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=20212C_TP;Trusted_Connection=True;");
             }
         }
 
@@ -78,6 +76,10 @@ namespace DAO.Entities
                 entity.Property(e => e.DeletedBy).HasMaxLength(50);
 
                 entity.Property(e => e.DeletedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(200);
 
                 entity.Property(e => e.Location)
                     .IsRequired()
