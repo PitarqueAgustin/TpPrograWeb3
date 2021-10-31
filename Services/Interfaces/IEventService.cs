@@ -13,6 +13,6 @@ namespace Services.Interfaces
         public List<Event> GetAll();
         public void Add(AddEventModel e, IFormFile image);
         public Event GetById(int id);
-        public void Delete(Event e);
+        public void Delete(int eventId, int chefId);
     }
 }

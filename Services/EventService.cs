@@ -52,9 +52,18 @@ namespace Services
             _eventRepo.Add(newEvent);
         }
 
-        public void Delete(Event e)
+        public void Delete(int eventId, int chefId)
         {
-            _eventRepo.Delete(e);
+            Event ev = _eventRepo.GetById(eventId);
+            User chef = _userRepo.GetById(chefId);
+
+            ev.ModifiedDate = DateTime.Now;
+            ev.ModifiedBy = chef.UserId.ToString();
+            ev.DeletedDate = DateTime.Now;
+            ev.DeletedBy = chef.UserId.ToString();
+            ev.State = (int)State.Cancelled;
+
+            _eventRepo.Delete(ev);
         }
 
         public List<Event> GetAll()

@@ -63,5 +63,20 @@ namespace RecetasTP.Controllers
             ModelState.AddModelError(string.Empty, "Error en el formulario.");
             return View("Index", e);
         }
+
+        [Route("chef/cancel/{id}")]
+        [HttpGet]
+        public IActionResult Cancel(int id)
+        {
+            int chefId = (int)HttpContext.Session.GetInt32("userId");
+
+            if (id == 0)
+            {
+                throw new ArgumentException("Evento inválido");
+            }
+
+            _eventService.Delete(id, chefId);
+            return View();
+        }
     }
 }

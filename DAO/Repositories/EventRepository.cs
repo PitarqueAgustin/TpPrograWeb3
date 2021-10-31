@@ -25,7 +25,6 @@ namespace DAO.Repositories
 
         public void Delete(Event e)
         {
-            _ctx.Events.Remove(e);
             SaveChanges();
         }
 
