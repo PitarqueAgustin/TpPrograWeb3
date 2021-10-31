@@ -22,15 +22,13 @@ namespace RecetasTP.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction("default");
+            return RedirectToAction("Default");
         }
 
-
-        [Route("default")]
+        [Route("Default")]
         public IActionResult Default()
         {
             ViewBag.Layout = HttpContext.Session.GetString("layout");
-            
             
             List<string> imageList = new List<string>();
             imageList.Add("34737dc8-a861-40bf-8fbd-2d207ba34376.jpg");
@@ -44,7 +42,6 @@ namespace RecetasTP.Controllers
         {
             return View();
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

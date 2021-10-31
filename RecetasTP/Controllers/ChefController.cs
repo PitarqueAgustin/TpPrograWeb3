@@ -14,10 +14,12 @@ namespace RecetasTP.Controllers
     public class ChefController : Controller
     {
         private IRecipeService _recipeService;
+        private IEventService _eventService;
 
-        public ChefController(IRecipeService recipeService)
+        public ChefController(IRecipeService recipeService, IEventService eventService)
         {
             _recipeService = recipeService;
+            _eventService = eventService;
         }
 
         [Route("/chef/recipes")]
@@ -34,6 +36,32 @@ namespace RecetasTP.Controllers
             recipe.ChefId = (int) HttpContext.Session.GetInt32("userId");
             _recipeService.Add(recipe);
             return Redirect("/");
+        }
+
+        [Route("chef/events")]
+        public IActionResult Events()
+        {
+            return View();
+        }
+
+        [Route("chef/events")]
+        [HttpPost]
+        public IActionResult Events(AddEventModel e, IFormFile image)
+        {
+            if (ModelState.IsValid && image != null)
+            {
+                e.ChefId = (int)HttpContext.Session.GetInt32("userId");
+                _eventService.Add(e, image);
+                return View();
+            }
+            else if (image == null)
+            {
+                ModelState.AddModelError(string.Empty, "Por favor adjunte una imágen");
+                return View("Index", e);
+            }
+
+            ModelState.AddModelError(string.Empty, "Error en el formulario.");
+            return View("Index", e);
         }
     }
 }
