@@ -28,14 +28,18 @@ namespace RecetasTP.Controllers
         [HttpPost]
         public IActionResult Add(AddEventModel e, IFormFile image)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && image != null)
             {
                 e.ChefId = (int)HttpContext.Session.GetInt32("userId");
                 _eventService.Add(e, image);
                 return View();
+            } else if (image == null)
+            {
+                ModelState.AddModelError(string.Empty, "Por favor adjunte una imágen");
+                return View("Index", e);
             }
             
-            ModelState.AddModelError(string.Empty, "Error en el form");
+            ModelState.AddModelError(string.Empty, "Error en el formulario.");
             return View("Index", e);
         }
 

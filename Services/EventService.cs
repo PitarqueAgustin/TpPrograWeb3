@@ -67,23 +67,14 @@ namespace Services
             return _eventRepo.GetById(id);
         }
 
-        public void SaveChanges()
-        {
-            _eventRepo.SaveChanges();
-        }
-
         public string CopyImage(IFormFile image)
         {
-            Tbl_News tbl_News = new Tbl_News();
-            if (image != null)
-            {
+            _ = new Tbl_News();
                 string ImageName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName); //Set Key Name
                 string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", ImageName); //Get url To Save
                 var stream = new FileStream(SavePath, FileMode.Create);
                 image.CopyTo(stream);
                 return ImageName;
-            }
-            return null;
         }
         
         internal class Tbl_News
