@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RecetasTP.Filters;
+using RecetasTP.Models;
 using Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,13 @@ namespace RecetasTP.Controllers
     {
         private IRecipeService _recipeService;
         private IEventService _eventService;
+        private IUserService _userService;
 
-        public ChefController(IRecipeService recipeService, IEventService eventService)
+        public ChefController(IRecipeService recipeService, IEventService eventService, IUserService userService)
         {
             _recipeService = recipeService;
             _eventService = eventService;
+            _userService = userService;
         }
 
         [Route("/chef/recipes")]
@@ -77,6 +80,31 @@ namespace RecetasTP.Controllers
 
             _eventService.Delete(id, chefId);
             return View();
+        }
+
+        [Route("chef/profile")]
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
+             ViewBag.recipesTypes = _recipeService.ListRecipeTypes().ToArray(); 
+            
+            int chefId = (int)HttpContext.Session.GetInt32("userId");
+
+            if (chefId == 0)
+            {
+                throw new ArgumentException("Id inválido");
+            }
+
+            ChefProfileViewModel model = new ChefProfileViewModel
+            {
+                chef = _userService.GetById(chefId),
+                recipeList = _recipeService.GetListByUser(chefId),
+                recipesCount = _recipeService.GetListByUser(chefId).Count(),
+                eventsList = _eventService.GetListByUser(chefId),
+            };
+
+            return View(model);
         }
     }
 }

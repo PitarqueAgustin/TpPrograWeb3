@@ -12,5 +12,6 @@ namespace DAO.Repositories.Interfaces
         public void Add(Recipe recipe);
         public RecipesType TypeForId(int recipeTypeId);
         public List<RecipesType> ListRecipeTypes();
+        public List<Recipe> GetListByUser(int chefId);
     }
 }

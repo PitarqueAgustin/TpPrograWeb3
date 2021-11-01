@@ -38,6 +38,11 @@ namespace Services
             _recipeRepo.Add(recipe);
         }
 
+        public List<Recipe> GetListByUser(int chefId)
+        {
+            return _recipeRepo.GetListByUser(chefId);
+        }
+
         public List<RecipesType> ListRecipeTypes()
         {
             return _recipeRepo.ListRecipeTypes();

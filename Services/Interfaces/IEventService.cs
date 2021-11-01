@@ -14,5 +14,6 @@ namespace Services.Interfaces
         public void Add(AddEventModel e, IFormFile image);
         public Event GetById(int id);
         public void Delete(int eventId, int chefId);
+        public List<Event> GetListByUser(int chefId);
     }
 }

@@ -24,6 +24,12 @@ namespace DAO.Repositories
             _ctx.SaveChanges();
         }
 
+        public List<Recipe> GetListByUser(int chefId)
+        {
+            var list = _ctx.Recipes.Where(r => r.ChefId == chefId);
+            return list.ToList();
+        }
+
         public List<RecipesType> ListRecipeTypes()
         {
             return _ctx.RecipesTypes.ToList();

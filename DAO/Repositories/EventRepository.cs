@@ -38,6 +38,12 @@ namespace DAO.Repositories
             return _ctx.Events.Find(id);
         }
 
+        public List<Event> GetListByUser(int chefId)
+        {
+            var list = _ctx.Events.Where(e => e.ChefId == chefId);
+            return list.ToList();
+        }
+
         public void SaveChanges()
         {
             _ctx.SaveChanges();

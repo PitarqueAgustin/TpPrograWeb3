@@ -85,7 +85,12 @@ namespace Services
                 image.CopyTo(stream);
                 return ImageName;
         }
-        
+
+        public List<Event> GetListByUser(int chefId)
+        {
+            return _eventRepo.GetListByUser(chefId);
+        }
+
         internal class Tbl_News
         {
         }

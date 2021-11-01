@@ -11,5 +11,6 @@ namespace Services.Interfaces
     {
         public void Add(AddRecipeModel recipeModel);
         public List<RecipesType> ListRecipeTypes();
+        public List<Recipe> GetListByUser(int chefId);
     }
 }
