@@ -25,11 +25,16 @@
             Perfil: <input type="number" name="Rol" value="Model.Rol" />
         </div>
         @*<div>
-            FechaRegistracion: <input type="datetime" name="date" value="" />
-        </div>*@
+                FechaRegistracion: <input type="datetime" name="date" value="" />
+            </div>*@
         <div>
             <input type="submit" name="Modify" value="Modify User" />
         </div>
 
     </form>
 </div>
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

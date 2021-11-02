@@ -11,5 +11,6 @@ namespace DAO.Repositories.Interfaces
         public void Delete(Event e);
         public void SaveChanges();
         public List<Event> GetListByUser(int chefId);
+        public List<Event> GetAvailables();
     }
 }

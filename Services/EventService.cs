@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
@@ -79,16 +77,41 @@ namespace Services
         public string CopyImage(IFormFile image)
         {
             _ = new Tbl_News();
-                string ImageName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName); //Set Key Name
-                string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", ImageName); //Get url To Save
-                var stream = new FileStream(SavePath, FileMode.Create);
-                image.CopyTo(stream);
-                return ImageName;
+            string ImageName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName); //Set Key Name
+            string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", ImageName); //Get url To Save
+            var stream = new FileStream(SavePath, FileMode.Create);
+            image.CopyTo(stream);
+            return ImageName;
         }
 
         public List<Event> GetListByUser(int chefId)
         {
             return _eventRepo.GetListByUser(chefId);
+        }
+
+        public Tuple<List<Event>, List<int>> GetAvailables()
+        {
+            var availableList = _eventRepo.GetAvailables().Distinct().ToList();
+            int sum = 0;
+            List<int> _availableDiners = new List<int>(new int[availableList.Count]);
+
+
+            for (int i = 0; i < availableList.Count; i++)
+            {
+                foreach (var book in availableList[i].Bookings)
+                {
+                    sum += book.DinersAmount;
+                }
+                if (sum >= availableList[i].DinersAmount)
+                {
+                    availableList.RemoveAt(i);
+                    _availableDiners.RemoveAt(i);
+                }
+                _availableDiners[i] = sum;
+                sum = 0;
+            }
+
+            return Tuple.Create(availableList, _availableDiners);
         }
 
         internal class Tbl_News

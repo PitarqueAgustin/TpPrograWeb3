@@ -1,0 +1,38 @@
+﻿@model RecetasTP.Models.DinerBookViewModel
+@{
+    Layout = ViewBag.Layout;
+    ViewData["Title"] = "Default Page";
+}
+
+<div class="text-center">
+    <br />
+    <h5>Listado de eventos disponibles</h5>
+
+    <div class="row">
+        @TempData["value"]
+    </div>
+
+    @{ int rowNum2 = 0; }
+    <div class="events">
+        @for (int i = 0; i < Model.eventsList.Count; i++)
+        {
+            <div class="event">
+                <div class="event-thumb-container">
+                    <img src="~/img/@Model.eventsList[i].Picture" alt="thumbnail" class="event-thumbnail" />
+                </div>
+                <div class="event-description">
+                    <p class="event-index">@(rowNum2 += 1)</p>
+                    <p class="event-name">@Model.eventsList[i].Name</p>
+                    <p class="event-name">$ @Model.eventsList[i].Price</p>
+                    <p class="event-rating">@Model.eventsList[i].Date</p>
+                    <p class="event-rating">Cupos disponibles: @((@Model.eventsList[i].DinersAmount - @Model.availableDiners[i]).ToString())</p>
+                </div>
+            </div>
+         }
+    </div>
+</div>
+
+    @section Scripts
+{
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

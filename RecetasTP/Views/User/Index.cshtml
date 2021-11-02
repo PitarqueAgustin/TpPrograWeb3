@@ -16,19 +16,24 @@
             <th>FechaRegistracion</th>
             <th>Acciones</th>
         </tr>
-    @foreach (var user in Model)
-    {
-    <tr>
-        <td>@user.Name</td>
-        <td>@user.Email</td>
-        <td>@user.Rol</td>
-        <td>@user.RegistrationDate</td>
-        <td><a href="/user/delete/@user.UserId">Borrar</a></td>
-        <td><a href="/user/modify/@user.UserId">Modificar</a></td>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                    <td>@user.Rol</td>
+                <td>@user.RegistrationDate</td>
+                <td><a href="/user/delete/@user.UserId">Borrar</a></td>
+                <td><a href="/user/modify/@user.UserId">Modificar</a></td>
 
-    </tr>
-    }
+            </tr>
+        }
     </table>
-        <br/>
+    <br />
 
 </div>
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
