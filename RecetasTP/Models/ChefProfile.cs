@@ -1,5 +1,4 @@
 using DAO.Entities;
-using System;
 using System.Collections.Generic;
 
 namespace RecetasTP.Models
@@ -10,6 +9,6 @@ namespace RecetasTP.Models
         public List<Recipe> recipeList { get; set; }
         public int recipesCount { get; set; }
         public List<Event> eventsList { get; set; }
-        public string[] eventTypesNames = { "", "Pending", "Finished", "Cancelled"};
+        public string[] eventTypesNames = { "", "Pendiente", "Finalizado", "Cancelado" };
     }
 }
