@@ -47,7 +47,7 @@ namespace RecetasTP.Controllers
                     if (_userService.IsMailAvailable(userModel.Email))
                     {
                         _userService.Add(userModel);
-                        return Redirect("/user");
+                        return Redirect("/default");
                     }
                     ModelState.AddModelError(string.Empty, "El mail ingresado no está disponible");
                     return View(userModel);

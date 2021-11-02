@@ -19,6 +19,9 @@ namespace DAO.Repositories
 
         public void Add(Recipe recipe)
         {
+            recipe.CreatedBy = recipe.ChefId.ToString();
+            recipe.CreatedDate = DateTime.Now;
+
             _ctx.Recipes.Add(recipe);
 
             _ctx.SaveChanges();
@@ -26,8 +29,13 @@ namespace DAO.Repositories
 
         public List<Recipe> GetListByUser(int chefId)
         {
-            var list = _ctx.Recipes.Where(r => r.ChefId == chefId);
+            var list = _ctx.Recipes.Where(r => r.ChefId == chefId).Where(r => r.DeletedDate == null);
             return list.ToList();
+        }
+
+        public Recipe GetRecipeForId(int id)
+        {
+            return _ctx.Recipes.Find(id);
         }
 
         public List<RecipesType> ListRecipeTypes()
@@ -35,9 +43,33 @@ namespace DAO.Repositories
             return _ctx.RecipesTypes.ToList();
         }
 
+        public void Remove(int recipeId)
+        {
+            Recipe recipe = _ctx.Recipes.Find(recipeId);
+
+            recipe.DeletedBy = recipe.ChefId.ToString();
+            recipe.DeletedDate = DateTime.Now;
+            recipe.ModifiedBy = recipe.ChefId.ToString();
+            recipe.ModifiedDate = DateTime.Now;
+
+            _ctx.Recipes.Update(recipe);
+
+            _ctx.SaveChanges();
+        }
+
         public RecipesType TypeForId(int recipeTypeId)
         {
             return _ctx.RecipesTypes.Find(recipeTypeId);
+        }
+
+        public void Update(Recipe recipe)
+        {
+            recipe.ModifiedBy = recipe.ChefId.ToString();
+            recipe.ModifiedDate = DateTime.Now;
+
+            _ctx.Recipes.Update(recipe);
+
+            _ctx.SaveChanges();
         }
     }
 }

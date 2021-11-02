@@ -1,0 +1,67 @@
+﻿@model DAO.Entities.AddRecipeModel;
+
+@{
+    Layout = ViewBag.Layout;
+    ViewData["Title"] = "Modificar receta";
+}
+
+<div class="row">
+    @TempData["Message"]
+</div>
+
+<div class="row w-100">
+    <div class="col-md-6">
+        <h3 class="display-4">Crear receta</h3>
+        <form asp-controller="Chef" asp-action="EditRecipe" method="post">
+            <input type="hidden" asp-for="RecipeId" value="@Model.RecipeId" />
+            <input type="hidden" asp-for="ChefId" value="@Model.ChefId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Nombre</label>
+                <input asp-for="Name" type="text" class="form-control" value="@Model.Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CookingTime" class="control-label">Tiempo de cocina</label>
+                <input asp-for="CookingTime" type="number" class="form-control" value="@Model.CookingTime" />
+                <span asp-validation-for="CookingTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Descripción</label>
+                <input asp-for="Description" type="text" class="form-control" value="@Model.Description" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredients" class="control-label">Ingredientes</label>
+                <input asp-for="Ingredients" type="text" class="form-control" value="@Model.Ingredients" />
+                <span asp-validation-for="Ingredients" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecipeTypeId" class="control-label">Tipo de receta</label>
+                <select asp-for="RecipeTypeId" class="form-control">
+                    @foreach (var type in ViewBag.RecipeTypes)
+                    {
+                        if (Model.RecipeTypeId == type.RecipeTypeId)
+                        {
+                            <option value="@type.RecipeTypeId" selected>@type.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@type.RecipeTypeId">@type.Name</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="RecipeTypeId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Modificar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

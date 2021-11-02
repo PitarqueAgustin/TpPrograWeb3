@@ -30,6 +30,8 @@ namespace RecetasTP.Controllers
         [HttpPost]
         public IActionResult Index(LoginModel model)
         {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
+
             if (ModelState.IsValid)
             {
                 if (_userService.Validate(model.Email, model.Password))

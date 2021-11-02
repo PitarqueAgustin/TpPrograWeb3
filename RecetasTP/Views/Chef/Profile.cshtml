@@ -59,21 +59,26 @@
                 <th scope="col">Descripción</th>
                 <th scope="col">Ingredientes</th>
                 <th scope="col">Tipo de receta</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
             @{ int rowNum = 0; }
             @foreach (var recipe in Model.recipeList)
             {
-            <tr>
-                <th scope="row">@(rowNum += 1)</th>
-                <td>@recipe.Name</td>
-                <td>@recipe.CookingTime</td>
-                <td>@recipe.Description</td>
-                <td>@recipe.Ingredients</td>
-                <td>@recipe.RecipeType.Name</td>
-                <td></td>
-            </tr>
+                <tr>
+                    <th scope="row">@(rowNum += 1)</th>
+                    <td>@recipe.Name</td>
+                    <td>@recipe.CookingTime</td>
+                    <td>@recipe.Description</td>
+                    <td>@recipe.Ingredients</td>
+                    <td>@recipe.RecipeType.Name</td>
+                    <td>
+                        <a href="/chef/recipes/@recipe.RecipeId/edit">edit</a>
+                        <a href="/chef/recipes/@recipe.RecipeId/delete">delete</a>
+                    </td>
+                    <td></td>
+                </tr>
             }
         </tbody>
     </table>
@@ -102,7 +107,7 @@
             @{ int rowNum2 = 0; }
             @foreach (var e in Model.eventsList)
             {
-                
+
                 <tr>
                     <th scope="row">@(rowNum2 += 1)</th>
                     <td>@e.Name</td>

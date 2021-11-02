@@ -34,9 +34,9 @@ namespace RecetasTP.Controllers
         }
 
         [HttpPost]
-        public IActionResult Recipe(AddRecipeModel recipe) 
+        public IActionResult Recipe(AddRecipeModel recipe)
         {
-            recipe.ChefId = (int) HttpContext.Session.GetInt32("userId");
+            recipe.ChefId = (int)HttpContext.Session.GetInt32("userId");
             _recipeService.Add(recipe);
             return Redirect("/");
         }
@@ -87,8 +87,8 @@ namespace RecetasTP.Controllers
         public IActionResult Profile()
         {
             ViewBag.Layout = HttpContext.Session.GetString("layout");
-             ViewBag.recipesTypes = _recipeService.ListRecipeTypes().ToArray(); 
-            
+            ViewBag.recipesTypes = _recipeService.ListRecipeTypes().ToArray();
+
             int chefId = (int)HttpContext.Session.GetInt32("userId");
 
             if (chefId == 0)
@@ -105,6 +105,61 @@ namespace RecetasTP.Controllers
             };
 
             return View(model);
+        }
+
+        [Route("chef/recipes/{id}/edit")]
+        [HttpGet]
+        public IActionResult EditRecipe(int id)
+        {
+            Recipe recipe = _recipeService.GetRecipeById(id);
+
+            AddRecipeModel recipeModel = new AddRecipeModel()
+            {
+                RecipeId = recipe.RecipeId,
+                ChefId = recipe.ChefId,
+                Name = recipe.Name,
+                CookingTime = recipe.CookingTime,
+                Description = recipe.Description,
+                Ingredients = recipe.Ingredients,
+                RecipeTypeId = recipe.RecipeTypeId
+            };
+
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
+            ViewBag.RecipeTypes = _recipeService.ListRecipeTypes();
+
+            return View(recipeModel);
+        }
+
+        [Route("chef/recipes/{id}/edit")]
+        [HttpPost]
+        public IActionResult EditRecipe(AddRecipeModel recipeModel) 
+        {
+            if (ModelState.IsValid)
+            {
+                Recipe recipe = new Recipe()
+                {
+                    RecipeId = recipeModel.RecipeId,
+                    ChefId = recipeModel.ChefId,
+                    Name = recipeModel.Name,
+                    CookingTime = recipeModel.CookingTime,
+                    Description = recipeModel.Description,
+                    Ingredients = recipeModel.Ingredients,
+                    RecipeTypeId = recipeModel.RecipeTypeId
+                };
+
+                _recipeService.Update(recipe);
+            }
+
+            return Redirect("/chef/profile");
+        }
+
+        [Route("chef/recipes/{id}/delete")]
+        [HttpGet]
+        public IActionResult DeleteRecipe(int id) 
+        {
+            _recipeService.Remove(id);
+
+            return Redirect("/chef/profile");
         }
     }
 }

@@ -31,6 +31,7 @@ namespace DAO.Entities
     [ModelMetadataType(typeof(AddRecipeMetadata))]
     public partial class AddRecipeModel 
     {
+        public int RecipeId { get; set; }
         public int ChefId { get; set; }
         public string Name { get; set; }
         public int CookingTime { get; set; }

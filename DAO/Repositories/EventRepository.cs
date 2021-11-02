@@ -41,7 +41,11 @@ namespace DAO.Repositories
         public List<Event> GetListByUser(int chefId)
         {
             var list = _ctx.Events.Where(e => e.ChefId == chefId);
-            return list.ToList();
+
+            if (list.Count() > 0)
+                return list.ToList();
+            else
+                return new List<Event>();
         }
 
         public void SaveChanges()

@@ -43,9 +43,24 @@ namespace Services
             return _recipeRepo.GetListByUser(chefId);
         }
 
+        public Recipe GetRecipeById(int id)
+        {
+            return _recipeRepo.GetRecipeForId(id);
+        }
+
         public List<RecipesType> ListRecipeTypes()
         {
             return _recipeRepo.ListRecipeTypes();
+        }
+
+        public void Remove(int recipeId)
+        {
+            _recipeRepo.Remove(recipeId);
+        }
+
+        public void Update(Recipe recipe)
+        {
+            _recipeRepo.Update(recipe);
         }
     }
 }

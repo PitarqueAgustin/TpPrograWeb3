@@ -49,6 +49,12 @@ namespace DAO.Entities
         public int ChefId { get; set; }
         [Required(ErrorMessage = "Campo obligatorio")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
+        public int CookingTime { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
+        public string Ingredients { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
+        public int RecipeTypeId { get; set; }
     }
 
     public class AddEventMetadata

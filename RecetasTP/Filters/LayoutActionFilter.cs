@@ -35,8 +35,8 @@ namespace RecetasTP.Filters
 
     public enum Roles
     {
-        Anonymous = 1,
-        Chef = 2,
-        Diner = 3
+        Anonymous = 0,
+        Diner = 1,
+        Chef = 2
     }
 }
