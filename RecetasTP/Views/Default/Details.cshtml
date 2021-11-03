@@ -1,0 +1,66 @@
+﻿@model RecetasTP.Models.DefaultDetailsViewModel
+
+@{
+    Layout = ViewBag.Layout;
+    ViewData["Title"] = "Default Page";
+}
+
+
+<div class="text-center">
+
+    <div class="row">
+        @TempData["value"]
+    </div>
+
+    <div class="container ">
+        <div class="row">
+            <div class="events noFlex col-4">
+                <div class="event">
+                    <div class="event-thumb-container">
+                        <img src="~/img/@Model.evnt.Picture" alt="thumbnail" class="event-thumbnail" />
+                    </div>
+                    <div class="event-description">
+                        <p class="event-name">@Model.evnt.Name</p>
+                        <p class="event-name">$ @Model.evnt.Price</p>
+                        <p class="event-rating">Fecha: @Model.evnt.Date</p>
+                        <p class="event-rating">Total comensales: @Model.evnt.DinersAmount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 autoMargin details">
+                <p>@Model.evnt.Description</p>
+                <br />
+                <p>Chef: @Model.evntChef.Name</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* Comments *@
+<div>
+    <h5>Comentarios</h5>
+    <table class="table profileTable">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int rowNum2 = 0; }
+            @foreach (var com in Model.evntComments)
+            {
+                <tr>
+                    <th scope="row">@(rowNum2 += 1)</th>
+                    <td>@com</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts
+    {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

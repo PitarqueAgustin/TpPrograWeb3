@@ -130,6 +130,11 @@ namespace Services
             return avgEventRatings;
         }
 
+        public List<string> GetCommentsForEventId(int id)
+        {
+            return _eventRepo.GetCommentsForEventId(id);
+        }
+
         internal class Tbl_News
         {
         }

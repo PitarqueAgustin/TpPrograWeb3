@@ -15,11 +15,13 @@ namespace RecetasTP.Controllers
     {
         private readonly ILogger<DefaultController> _logger;
         private IEventService _eventService;
+        private IUserService _userService;
 
-        public DefaultController(ILogger<DefaultController> logger, IEventService eventService)
+        public DefaultController(ILogger<DefaultController> logger, IEventService eventService, IUserService userService)
         {
             _logger = logger;
             _eventService = eventService;
+            _userService = userService;
         }
 
         public IActionResult Index()
@@ -40,6 +42,23 @@ namespace RecetasTP.Controllers
             };
 
             return View(defaultEventList);
+        }
+
+        [HttpGet]
+        [Route("Default/Details/{id}")]
+        public IActionResult Details(int id)
+        {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
+
+            Event _evnt = _eventService.GetById(id);
+            DefaultDetailsViewModel eventDetails = new DefaultDetailsViewModel
+            {
+                evnt = _evnt,
+                evntChef = _userService.GetById(_evnt.ChefId),
+                evntComments = _eventService.GetCommentsForEventId(id)
+            };
+
+            return View(eventDetails);
         }
 
         public IActionResult Privacy()
