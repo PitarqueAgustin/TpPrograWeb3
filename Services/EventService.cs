@@ -114,6 +114,22 @@ namespace Services
             return Tuple.Create(availableList, _availableDiners);
         }
 
+        public List<Event> GetLastEventsEnded()
+        {
+            List<Event> lastEvents = _eventRepo.GetLastEventsEnded();
+            return lastEvents;
+        }
+
+        public List<double> GetAverageRating(List<Event> lastEvents)
+        {
+            List<double> avgEventRatings = new List<double>(new double[lastEvents.Count]);
+            for (int i = 0; i < lastEvents.Count; i++)
+            {
+                avgEventRatings[i] = _eventRepo.GetAverageRating(lastEvents[i].EventId);
+            }
+            return avgEventRatings;
+        }
+
         internal class Tbl_News
         {
         }

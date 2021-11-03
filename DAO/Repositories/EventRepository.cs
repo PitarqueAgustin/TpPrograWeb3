@@ -53,6 +53,15 @@ namespace DAO.Repositories
             return _ctx.Events.Find(id);
         }
 
+        public List<Event> GetLastEventsEnded()
+        {
+            var query = _ctx.Events.Where(e => e.Ratings.Any()
+                                            && e.State == 2
+                                            && e.Date < DateTime.Now.Date)
+                                    .OrderByDescending(e => e.Date).Take(6);
+            return query.ToList();
+        }
+
         public List<Event> GetListByUser(int chefId)
         {
             var list = _ctx.Events.Where(e => e.ChefId == chefId);
@@ -61,6 +70,12 @@ namespace DAO.Repositories
                 return list.ToList();
             else
                 return new List<Event>();
+        }
+
+        public double GetAverageRating(int id)
+        {
+            var query = _ctx.Ratings.Where(r => r.EventId == id).Average(r => r.Rating1);
+            return query;
         }
 
         public void SaveChanges()

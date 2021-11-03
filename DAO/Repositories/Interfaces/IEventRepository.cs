@@ -12,5 +12,7 @@ namespace DAO.Repositories.Interfaces
         public void SaveChanges();
         public List<Event> GetListByUser(int chefId);
         public List<Event> GetAvailables();
+        public List<Event> GetLastEventsEnded();
+        public double GetAverageRating(int id);
     }
 }
