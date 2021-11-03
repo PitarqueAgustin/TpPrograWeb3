@@ -13,5 +13,7 @@ namespace Services.Interfaces
         public void Delete(int eventId, int chefId);
         public List<Event> GetListByUser(int chefId);
         public Tuple<List<Event>, List<int>> GetAvailables();
+        public List<Event> GetLastEventsEnded();
+        public List<double> GetAverageRating(List<Event> lastEvents);
     }
 }
