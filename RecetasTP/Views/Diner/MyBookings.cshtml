@@ -2,11 +2,11 @@
 
 @{
     Layout = ViewBag.Layout;
-    TempData["Title"] = "Mis Reservas";
+    ViewData["Title"] = "Mis Recetas";
 
     string GetColor(string state)
     {
-        switch (state) 
+        switch (state)
         {
             case "Pendiente":
                 return "bg-info";
