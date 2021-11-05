@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DAO.Entities
@@ -29,7 +28,7 @@ namespace DAO.Entities
     }
 
     [ModelMetadataType(typeof(AddRecipeMetadata))]
-    public partial class AddRecipeModel 
+    public partial class AddRecipeModel
     {
         public int RecipeId { get; set; }
         public int ChefId { get; set; }
@@ -51,5 +50,22 @@ namespace DAO.Entities
         public decimal Price { get; set; }
         public int ChefId { get; set; }
         public IFormFile Picture { get; set; }
+    }
+
+    public partial class CurrentDateAttribute : ValidationAttribute
+    {
+        public CurrentDateAttribute()
+        {
+        }
+
+        public override bool IsValid(object value)
+        {
+            var dt = (DateTime)value;
+            if (dt >= DateTime.Now)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

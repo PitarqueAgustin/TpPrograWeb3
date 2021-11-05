@@ -43,7 +43,7 @@ namespace DAO.Entities
         public int Rol { get; set; }
     }
 
-    public class AddRecipeMetadata 
+    public class AddRecipeMetadata
     {
         [Required]
         public int ChefId { get; set; }
@@ -66,12 +66,13 @@ namespace DAO.Entities
         [StringLength(200, ErrorMessage = "El campo no puede tener más de {1} caracteres.")]
         public string Description { get; set; }
         [Required(ErrorMessage = "Campo obligatorio")]
+        [CurrentDate(ErrorMessage = "La fecha tiene que ser posterior o igual a la fecha actual")]
         public DateTime Date { get; set; }
         [Required(ErrorMessage = "Campo obligatorio")]
         [Range(1, 500, ErrorMessage = "Mínimo {1}, máximo {2} comensales.")]
         public int DinersAmount { get; set; }
         [Required(ErrorMessage = "Campo obligatorio")]
-        [StringLength(50, ErrorMessage = "El campo no puede tener más de {1} caracteres.")] 
+        [StringLength(50, ErrorMessage = "El campo no puede tener más de {1} caracteres.")]
         public string Location { get; set; }
         [Required(ErrorMessage = "Campo obligatorio")]
 
