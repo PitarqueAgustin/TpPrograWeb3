@@ -114,6 +114,17 @@ namespace Services
             return Tuple.Create(availableList, _availableDiners);
         }
 
+        public List<int> GetReservedSpots(List<Event> eventList)
+        {
+            List<int> reservedSpots = new List<int>();
+            for (int i = 0; i < eventList.Count; i++)
+            {
+                reservedSpots.Add(_eventRepo.GetReservedSpotsById(eventList[i].EventId));
+            }
+
+            return reservedSpots;
+        }
+
         public List<Event> GetLastEventsEnded()
         {
             List<Event> lastEvents = _eventRepo.GetLastEventsEnded();

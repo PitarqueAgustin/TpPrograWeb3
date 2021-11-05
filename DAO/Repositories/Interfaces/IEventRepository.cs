@@ -15,5 +15,6 @@ namespace DAO.Repositories.Interfaces
         public List<Event> GetLastEventsEnded();
         public double GetAverageRating(int id);
         public List<string> GetCommentsForEventId(int id);
+        public int GetReservedSpotsById(int eventId);
     }
 }

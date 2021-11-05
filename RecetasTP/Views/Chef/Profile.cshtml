@@ -105,20 +105,19 @@
         </thead>
         <tbody>
             @{ int rowNum2 = 0; }
-            @foreach (var e in Model.eventsList)
+            @for (int i = 0; i < Model.eventsList.Count; i++)
             {
-
-                <tr>
-                    <th scope="row">@(rowNum2 += 1)</th>
-                    <td>@e.Name</td>
-                    <td>@e.Date</td>
-                    <td>@e.Description</td>
-                    <td id="val1">@e.DinersAmount</td>
-                    <td id="val2">Cant Reserva</td>
-                    <td id="result">@((e.DinersAmount - e.DinersAmount).ToString())</td>
-                    <td>@Model.eventTypesNames[e.State]</td>
-                    <td></td>
-                </tr>
+            <tr>
+                <th scope="row">@(rowNum2 += 1)</th>
+                <td>@Model.eventsList[i].Name</td>
+                <td>@Model.eventsList[i].Date</td>
+                <td>@Model.eventsList[i].Description</td>
+                <td id="val1">@Model.eventsList[i].DinersAmount</td>
+                <td id="val2">@Model.reservedSpots[i]</td>
+                <td id="result">@((Model.eventsList[i].DinersAmount - @Model.reservedSpots[i]).ToString())</td>
+                <td>@Model.eventTypesNames[Model.eventsList[i].State]</td>
+                <td></td>
+            </tr>
             }
         </tbody>
     </table>
