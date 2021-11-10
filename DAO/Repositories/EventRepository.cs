@@ -82,6 +82,19 @@ namespace DAO.Repositories
         {
             _ctx.SaveChanges();
         }
-    }
 
+        public List<string> GetCommentsForEventId(int id)
+        {
+            var query = _ctx.Ratings.Where(r => r.EventId == id).Select(r => r.Comments).ToList();
+            return query;
+        }
+
+        public int GetReservedSpotsById(int eventId)
+        {
+            var query = _ctx.Bookings.Where(b => b.EventId == eventId)
+                .Sum(e => e.DinersAmount);
+
+            return query;
+        }
+    }
 }

@@ -7,7 +7,6 @@ using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace RecetasTP.Controllers
 {
@@ -44,6 +43,7 @@ namespace RecetasTP.Controllers
         [Route("chef/events")]
         public IActionResult Events()
         {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
             return View();
         }
 
@@ -60,11 +60,11 @@ namespace RecetasTP.Controllers
             else if (image == null)
             {
                 ModelState.AddModelError(string.Empty, "Por favor adjunte una imágen");
-                return View("Index", e);
+                return View("Events", e);
             }
 
             ModelState.AddModelError(string.Empty, "Error en el formulario.");
-            return View("Index", e);
+            return View("Events", e);
         }
 
         [Route("chef/cancel/{id}")]
@@ -79,7 +79,7 @@ namespace RecetasTP.Controllers
             }
 
             _eventService.Delete(id, chefId);
-            return View();
+            return RedirectToAction("Profile");
         }
 
         [Route("chef/profile")]
@@ -96,12 +96,15 @@ namespace RecetasTP.Controllers
                 throw new ArgumentException("Id inválido");
             }
 
+
+            List<Event> _eventsList = _eventService.GetListByUser(chefId);
             ChefProfileViewModel model = new ChefProfileViewModel
             {
                 chef = _userService.GetById(chefId),
                 recipeList = _recipeService.GetListByUser(chefId),
                 recipesCount = _recipeService.GetListByUser(chefId).Count(),
-                eventsList = _eventService.GetListByUser(chefId),
+                eventsList = _eventsList,
+                reservedSpots = _eventService.GetReservedSpots(_eventsList)
             };
 
             return View(model);
@@ -132,7 +135,7 @@ namespace RecetasTP.Controllers
 
         [Route("chef/recipes/{id}/edit")]
         [HttpPost]
-        public IActionResult EditRecipe(AddRecipeModel recipeModel) 
+        public IActionResult EditRecipe(AddRecipeModel recipeModel)
         {
             if (ModelState.IsValid)
             {
@@ -155,7 +158,7 @@ namespace RecetasTP.Controllers
 
         [Route("chef/recipes/{id}/delete")]
         [HttpGet]
-        public IActionResult DeleteRecipe(int id) 
+        public IActionResult DeleteRecipe(int id)
         {
             _recipeService.Remove(id);
 

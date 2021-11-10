@@ -10,5 +10,6 @@ namespace RecetasTP.Models
         public int recipesCount { get; set; }
         public List<Event> eventsList { get; set; }
         public string[] eventTypesNames = { "", "Pendiente", "Finalizado", "Cancelado" };
+        public List<int> reservedSpots { get; set; }
     }
 }

@@ -15,5 +15,7 @@ namespace Services.Interfaces
         public Tuple<List<Event>, List<int>> GetAvailables();
         public List<Event> GetLastEventsEnded();
         public List<double> GetAverageRating(List<Event> lastEvents);
+        public List<string> GetCommentsForEventId(int id);
+        public List<int> GetReservedSpots(List<Event> eventList);
     }
 }

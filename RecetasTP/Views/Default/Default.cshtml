@@ -17,6 +17,7 @@
     <div class="events">
         @for (int i = 0; i < Model.eventsList.Count; i++)
         {
+        <a href="/default/details/@Model.eventsList[i].EventId">
             <div class="event">
                 <div class="event-thumb-container">
                     <img src="~/img/@Model.eventsList[i].Picture" alt="thumbnail" class="event-thumbnail" />
@@ -25,9 +26,10 @@
                     <p class="event-index" id="index">@((i+1))</p>
                     <p class="event-name">@Model.eventsList[i].Name</p>
                     <p class="event-name">$ @Model.eventsList[i].Price</p>
-                    <p class="event-rating">@Model.avgEventRatings[i]</p>
+                    <p class="event-rating">@Model.avgEventRatings[i].ToString("0.0")</p>
                 </div>
             </div>
+        </a>
         }
     </div>
 </div>
