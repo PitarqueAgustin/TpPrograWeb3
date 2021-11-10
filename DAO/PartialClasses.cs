@@ -11,6 +11,11 @@ namespace DAO.Entities
     {
     }
 
+    [ModelMetadataType(typeof(RatingMetadata))]
+    public partial class Rating
+    {
+    }
+
     [ModelMetadataType(typeof(LoginMetadata))]
     public partial class LoginModel
     {
@@ -52,4 +57,5 @@ namespace DAO.Entities
         public int ChefId { get; set; }
         public IFormFile Picture { get; set; }
     }
+
 }

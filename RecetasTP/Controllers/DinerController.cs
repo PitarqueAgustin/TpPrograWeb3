@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DAO.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RecetasTP.Filters;
 using RecetasTP.Models;
@@ -15,14 +16,17 @@ namespace RecetasTP.Controllers
         private IEventService _eventService;
         private IUserService _userService;
         private IBookingService _bookingService;
+        private IRatingService _ratingService;
 
         public DinerController(IRecipeService recipeService, IEventService eventService, 
-                                IUserService userService, IBookingService bookingService)
+                                IUserService userService, IBookingService bookingService,
+                                IRatingService ratingService)
         {
             _recipeService = recipeService;
             _eventService = eventService;
             _userService = userService;
             _bookingService = bookingService;
+            _ratingService = ratingService;
         }
 
         [Route("/diner/book")]
@@ -67,6 +71,33 @@ namespace RecetasTP.Controllers
                 });
             }
             return View(model);
+        }
+
+        [Route("/diner/comments/{id}")]
+        public IActionResult Comments(int id) 
+        {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
+            var even = _eventService.GetById(id);
+            Rating model = new Rating()
+            {
+                EventId = even.EventId,
+                Event = even
+            };
+            return View(model);            
+        }
+
+        [HttpPost]
+        public IActionResult SendComment(Rating rating) 
+        {
+            if (ModelState.IsValid) 
+            {
+                rating.DinerId = (int)HttpContext.Session.GetInt32("userId");
+                _ratingService.Add(rating);
+
+                return RedirectToAction(nameof(MyBookings));
+            }
+
+            return RedirectToAction(nameof(Comments));
         }
     }
 }

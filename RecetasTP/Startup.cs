@@ -48,6 +48,9 @@ namespace RecetasTP
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IBookingService, BookingService>();
 
+            services.AddScoped<IRatingRepository, RatingRepository>();
+            services.AddScoped<IRatingService, RatingService>();
+
 
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
