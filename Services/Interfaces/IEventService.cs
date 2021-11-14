@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using static Services.EventService;
 
 namespace Services.Interfaces
 {
@@ -17,5 +18,9 @@ namespace Services.Interfaces
         public List<double> GetAverageRating(List<Event> lastEvents);
         public List<string> GetCommentsForEventId(int id);
         public List<int> GetReservedSpots(List<Event> eventList);
+        public void Update(Event ev, IFormFile image);
+        public List<State> getStates();
+        public void Remove(int id);
+
     }
 }

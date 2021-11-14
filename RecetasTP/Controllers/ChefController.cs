@@ -164,5 +164,63 @@ namespace RecetasTP.Controllers
 
             return Redirect("/chef/profile");
         }
+
+
+        [Route("chef/events/{id}/edit")]
+        [HttpGet]
+        public IActionResult EditEvent(int id)
+        {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
+            ViewBag.EventStates = _eventService.getStates();
+            
+            Event ev = _eventService.GetById(id);
+
+            return View(ev);
+        }
+
+        [Route("chef/events/{id}/edit")]
+        [HttpPost]
+        public IActionResult EditEvent(Event ev, IFormFile image)
+        {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
+            ViewBag.EventStates = _eventService.getStates();
+
+            if (image == null)
+            {
+                ModelState.AddModelError(string.Empty, "Por favor adjunte una imágen");
+                return View("EditEvent", ev);
+            }
+
+            if (ModelState.IsValid)
+            {
+
+
+                Event modifiedEv = new Event()
+                {
+                    EventId = ev.EventId,
+                    ChefId = ev.ChefId,
+                    Name = ev.Name,
+                    Description = ev.Description,
+                    Date = ev.Date,
+                    DinersAmount = ev.DinersAmount,
+                    Location = ev.Location,
+                    Picture = ev.Picture,
+                    Price = ev.Price,
+                    State = ev.State
+                };
+                _eventService.Update(modifiedEv, image);
+            }
+            
+
+            return Redirect("/chef/profile");
+        }
+
+        [Route("chef/events/{id}/delete")]
+        [HttpGet]
+        public IActionResult DeleteEvent(int id)
+        {
+            _eventService.Remove(id);
+            return Redirect("/chef/profile");
+        }
     }
 }
