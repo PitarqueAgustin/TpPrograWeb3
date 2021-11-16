@@ -22,7 +22,7 @@ namespace DAO.Entities
     {
         [Required]
         [Range(1, 5, ErrorMessage = "Mínimo {1}, máximo {2} valor de puntuación.")]
-        public decimal Rating1 { get; set; }
+        public int Rating1 { get; set; }
         [Required]
         public string Comments { get; set; }
     }
