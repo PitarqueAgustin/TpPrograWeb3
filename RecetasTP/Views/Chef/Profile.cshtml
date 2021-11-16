@@ -116,6 +116,10 @@
                 <td id="val2">@Model.reservedSpots[i]</td>
                 <td id="result">@((Model.eventsList[i].DinersAmount - @Model.reservedSpots[i]).ToString())</td>
                 <td>@Model.eventTypesNames[Model.eventsList[i].State]</td>
+                <td>
+                    <a href="/chef/events/@Model.eventsList[i].EventId/edit">edit</a>
+                    <a href="/chef/events/@Model.eventsList[i].EventId/delete">delete</a>
+                </td>
                 <td></td>
             </tr>
             }

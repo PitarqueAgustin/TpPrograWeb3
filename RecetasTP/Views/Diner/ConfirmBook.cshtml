@@ -1,0 +1,74 @@
+﻿@model RecetasTP.Models.ConfirmBookViewModel
+
+@{
+    Layout = ViewBag.Layout;
+    ViewData["Title"] = "Default Page";
+}
+
+
+<div class="text-center">
+
+    <div class="row">
+        @TempData["value"]
+    </div>
+
+    <div class="container ">
+        <div class="row">
+            <div class="events noFlex col-4">
+                <div class="event">
+                    <div class="event-thumb-container">
+                        <img src="~/img/@Model.evnt.Picture" alt="thumbnail" class="event-thumbnail" />
+                    </div>
+                    <div class="event-description">
+                        <p class="event-name">@Model.evnt.Name</p>
+                        <p class="event-name">$ @Model.evnt.Price</p>
+                        <p class="event-rating">Fecha: @Model.evnt.Date</p>
+                        <p class="event-rating">Total comensales: @Model.evnt.DinersAmount</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 autoMargin details">
+                <p>@Model.evnt.Description</p>
+                <br />
+                <p>Chef: @Model.evntChef.Name</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row w-100">
+    <div class="col-md-8">
+        <h5 class="display-4">Datos de reserva</h5>
+        <form asp-controller="Diner" asp-action="book" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="evnt.EventId" value="@Model.evnt.EventId" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ReservedAmount" class="control-label">Cantidad de comensales:</label>
+                <input asp-for="ReservedAmount" class="form-control" min="1" type="number" />
+                <span asp-validation-for="ReservedAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecipeId" class="control-label">Receta a degustar:</label>
+                <select asp-for="RecipeId" class="form-control">
+                    @foreach (var type in ViewBag.RecipeList)
+                    {
+                        <option value="@type.RecipeId">@type.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="RecipeId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Reservar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts
+    {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

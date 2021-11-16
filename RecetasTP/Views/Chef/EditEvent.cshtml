@@ -1,0 +1,83 @@
+﻿@model DAO.Entities.Event;
+
+@{
+    Layout = ViewBag.Layout;
+    ViewData["Title"] = "Modificar evento";
+}
+
+<div class="row">
+    @TempData["Message"]
+</div>
+
+<div class="row w-100">
+    <div class="col-md-8">
+        <h3 class="display-4">Crear evento</h3>
+        <form asp-controller="Chef" asp-action="EditEvent" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="EventId" value="@Model.EventId" />
+            <input type="hidden" asp-for="ChefId" value="@Model.ChefId" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Nombre</label>
+                <input asp-for="Name" type="text" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Descripción</label>
+                <textarea asp-for="Description" class="form-control"> </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label">Fecha</label>
+                <input asp-for="Date" class="form-control" type="datetime-local" id="date" name="Date" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DinersAmount" class="control-label">Cantidad</label>
+                <input asp-for="DinersAmount" class="form-control" min="1" type="number" />
+                <span asp-validation-for="DinersAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label">Ubicación</label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Precio</label>
+                <input asp-for="Price" class="form-control" min="1" type="number" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Picture" class="control-label">Imagen</label>
+                <input asp-for="Picture" class="form-control" type="file" name="image" />
+                <span asp-validation-for="Picture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="State" class="control-label">Estado</label>
+                <select asp-for="State" class="form-control">
+                    @for (var i = 0; i < ViewBag.EventStates.Count; i++)
+                   {
+                       if (Model.State-1 == i)
+                        {
+                            <option value="@(i+1)" selected>@ViewBag.EventStates[i]</option>
+                        }
+                        else
+                        {
+                            <option value="@(i+1)">@ViewBag.EventStates[i]</option>
+                        }
+                   }
+                </select>
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

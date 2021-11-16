@@ -18,6 +18,11 @@ namespace Services
             _bookingRepository = bookingRepository;
         }
 
+        public void Add(Booking booking)
+        {
+            _bookingRepository.Add(booking);
+        }
+
         public List<Booking> GetListBookingsForDinerId(int dinerId)
         {
             return _bookingRepository.GetListBookingsForDinerId(dinerId);

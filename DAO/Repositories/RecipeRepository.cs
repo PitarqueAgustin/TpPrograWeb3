@@ -38,6 +38,17 @@ namespace DAO.Repositories
             return _ctx.Recipes.Find(id);
         }
 
+        public List<Recipe> GetRecipesFromEventId(int eventId)
+        {
+            var query = from ev in _ctx.Events
+                        join er in _ctx.EventsRecipes on ev.EventId equals er.EventId
+                        join r  in _ctx.Recipes on er.RecipeId equals r.RecipeId
+                        where er.EventId == eventId
+                        select r;
+
+            return query.ToList();
+        }
+
         public List<RecipesType> ListRecipeTypes()
         {
             return _ctx.RecipesTypes.ToList();

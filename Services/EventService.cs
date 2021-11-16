@@ -146,6 +146,13 @@ namespace Services
             return _eventRepo.GetCommentsForEventId(id);
         }
 
+        public void Update(Event ev, IFormFile image)
+        {
+            string imageName = CopyImage(image);
+            ev.Picture = imageName;
+            _eventRepo.Update(ev);
+        }
+
         internal class Tbl_News
         {
         }
@@ -155,6 +162,17 @@ namespace Services
             Pending = 1,
             Finished = 2,
             Cancelled = 3
+        }
+
+        public List<State> getStates()
+        {
+            var valuesAsList = Enum.GetValues(typeof(State)).Cast<State>().ToList();
+            return valuesAsList;
+        }
+
+        public void Remove(int id)
+        {
+            _eventRepo.Remove(id);
         }
     }
 }

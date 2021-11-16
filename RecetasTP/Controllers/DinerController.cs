@@ -50,6 +50,52 @@ namespace RecetasTP.Controllers
             return View(model);
         }
 
+        [Route("/diner/book/{id}")]
+        [HttpGet]
+        public IActionResult ConfirmBook(int id)
+        {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
+            ViewBag.RecipeList = _recipeService.GetRecipesFromEventId(id);
+            Event ev = _eventService.GetById(id);
+
+            ConfirmBookViewModel model = new ConfirmBookViewModel()
+            {
+                evnt = ev,
+                evntChef = _userService.GetById(ev.ChefId),
+                ReservedAmount = 0,
+                RecipeId = 0
+            };
+
+            return View(model);
+            // Mostrar caracteristicas del evento
+            // + SELECT de las recetas
+            // + Cantidad comensales
+        }
+
+        [Route("/diner/book")]
+        [HttpPost]
+        public IActionResult ConfirmBook(ConfirmBookViewModel model)
+        {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
+            int dinerId = (int)HttpContext.Session.GetInt32("userId");
+
+            Booking booking = new Booking()
+            {
+                EventId = model.evnt.EventId,
+                DinerId = dinerId,
+                RecipeId = model.RecipeId,
+                DinersAmount = model.ReservedAmount,
+                CreationDate = DateTime.Now,
+                Diner = _userService.GetById(dinerId),
+                Event = _eventService.GetById(model.evnt.EventId),
+                Recipe = _recipeService.GetRecipeById(model.RecipeId),
+            };
+
+            _bookingService.Add(booking);
+
+            return RedirectToAction("Book");
+        }
+
         [Route("/diner/bookings")]
         public IActionResult MyBookings()
         {

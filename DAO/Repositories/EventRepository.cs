@@ -96,5 +96,25 @@ namespace DAO.Repositories
 
             return query;
         }
+
+        public void Update(Event ev)
+        {
+            ev.ModifiedBy = ev.ChefId.ToString();
+            ev.ModifiedDate = DateTime.Now;
+
+            _ctx.Events.Update(ev);
+            _ctx.SaveChanges();
+        }
+
+        public void Remove(int id)
+        {
+            Event ev = _ctx.Events.Find(id);
+            ev.DeletedBy = ev.ChefId.ToString();
+            ev.DeletedDate = DateTime.Now;
+            ev.ModifiedBy = ev.ChefId.ToString();
+            ev.ModifiedDate= DateTime.Now;
+            _ctx.Events.Remove(ev);
+            _ctx.SaveChanges();
+        }
     }
 }
