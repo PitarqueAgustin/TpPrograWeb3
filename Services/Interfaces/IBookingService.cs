@@ -10,5 +10,6 @@ namespace Services.Interfaces
     public interface IBookingService
     {
         public List<Booking> GetListBookingsForDinerId(int dinerId);
+        public void Add(Booking booking);
     }
 }

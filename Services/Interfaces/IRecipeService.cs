@@ -15,5 +15,7 @@ namespace Services.Interfaces
         public Recipe GetRecipeById(int recipeId);
         public void Update(Recipe recipe);
         public void Remove(int recipeId);
+        public List<Recipe> GetRecipesFromEventId(int eventId);
+
     }
 }

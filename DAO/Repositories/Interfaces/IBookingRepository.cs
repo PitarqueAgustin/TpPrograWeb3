@@ -10,5 +10,6 @@ namespace DAO.Repositories.Interfaces
     public interface IBookingRepository
     {
         public List<Booking> GetListBookingsForDinerId(int dinerId);
+        public void Add(Booking booking);
     }
 }

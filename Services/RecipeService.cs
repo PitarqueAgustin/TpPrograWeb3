@@ -48,6 +48,11 @@ namespace Services
             return _recipeRepo.GetRecipeForId(id);
         }
 
+        public List<Recipe> GetRecipesFromEventId(int eventId)
+        {
+            return _recipeRepo.GetRecipesFromEventId(eventId);
+        }
+
         public List<RecipesType> ListRecipeTypes()
         {
             return _recipeRepo.ListRecipeTypes();

@@ -16,6 +16,12 @@ namespace DAO.Repositories
             _ctx = ctx;
         }
 
+        public void Add(Booking booking)
+        {
+            _ctx.Add(booking);
+            _ctx.SaveChanges();
+        }
+
         public List<Booking> GetListBookingsForDinerId(int dinerId)
         {
             return _ctx.Bookings.Where(b => b.DinerId == dinerId).ToList();

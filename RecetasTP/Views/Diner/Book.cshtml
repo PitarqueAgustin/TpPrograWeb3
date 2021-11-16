@@ -5,69 +5,33 @@
 }
 
 <div class="text-center">
-       <br />
-       <h5>Listado de eventos disponibles</h5>
+    <br />
+    <h5>Listado de eventos disponibles</h5>
 
-       <div class="row">
-           @TempData["value"]
-       </div>
-
-       @{ int rowNum2 = 0; }
-       <div class="events">
-           @for (int i = 0; i < Model.eventsList.Count; i++)
-           {
-           <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="submit">
-
-               <div class="event">
-                   <div class="event-thumb-container">
-                       <img src="~/img/@Model.eventsList[i].Picture" alt="thumbnail" class="event-thumbnail" />
-                   </div>
-                   <div class="event-description">
-                       @*<p class="event-index" id="index">@(rowNum2 += 1)</p>*@
-                       <p class="event-index" id="index">@((i+1))</p>
-                       <p class="event-name">@Model.eventsList[i].Name</p>
-                       <p class="event-name">$ @Model.eventsList[i].Price</p>
-                       <p class="event-rating">@Model.eventsList[i].Date</p>
-                       <p class="event-rating">Cupos disponibles: @((@Model.eventsList[i].DinersAmount - @Model.availableDiners[i]).ToString())</p>
-                   </div>
-               </div>
-           </button>
-           }
-       </div>
+    <div class="row">
+        @TempData["value"]
     </div>
 
-
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="submit">Launch demo modal</button>
-<a href="#exampleModal" data-toggle="modal" data-target="#exampleModal">Load me</a>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <div class="events">
+        @for (int i = 0; i < Model.eventsList.Count; i++)
+        {
+        <a href="/diner/book/@Model.eventsList[i].EventId">
+            <div class="event">
+                <div class="event-thumb-container">
+                    <img src="~/img/@Model.eventsList[i].Picture" alt="thumbnail" class="event-thumbnail" />
+                </div>
+                <div class="event-description">
+                    <p class="event-index" id="index">@((i+1))</p>
+                    <p class="event-name">@Model.eventsList[i].Name</p>
+                    <p class="event-name">$ @Model.eventsList[i].Price</p>
+                    <p class="event-rating">@Model.eventsList[i].Date</p>
+                    <p class="event-rating">Cupos disponibles: @((@Model.eventsList[i].DinersAmount - @Model.availableDiners[i]).ToString())</p>
+                </div>
             </div>
-            <div class="modal-body">
-                <h6 id="modal_body"></h6>
-            </div>
-
-            <div class="modal-footer">
-                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>*@
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" id="submit"> Submit </button>
-            </div>
-        </div>
+        </a>
+        }
     </div>
 </div>
-
-
-
 
 
 @section Scripts
