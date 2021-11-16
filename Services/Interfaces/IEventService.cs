@@ -9,7 +9,7 @@ namespace Services.Interfaces
     public interface IEventService
     {
         public List<Event> GetAll();
-        public void Add(AddEventModel e, IFormFile image);
+        public void Add(AddEventModel e, IFormFile image, string[] recipesId);
         public Event GetById(int id);
         public void Delete(int eventId, int chefId);
         public List<Event> GetListByUser(int chefId);
@@ -21,6 +21,6 @@ namespace Services.Interfaces
         public void Update(Event ev, IFormFile image);
         public List<State> getStates();
         public void Remove(int id);
-
+        public void AddEventRecipe(EventsRecipe eventRecipe);
     }
 }

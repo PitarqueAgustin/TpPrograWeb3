@@ -13,14 +13,17 @@ namespace Services
     {
         private IEventRepository _eventRepo;
         private IUserRepository _userRepo;
+        private IRecipeRepository _recipeRepo;
 
-        public EventService(IEventRepository eventRepo, IUserRepository userRepo)
+        public EventService(IEventRepository eventRepo, IUserRepository userRepo,
+            IRecipeRepository recipeRepo)
         {
             _eventRepo = eventRepo;
             _userRepo = userRepo;
+            _recipeRepo = recipeRepo;
         }
 
-        public void Add(AddEventModel e, IFormFile image)
+        public void Add(AddEventModel e, IFormFile image, string[] recipesId)
         {
             string imageName = CopyImage(image);
             User chef = _userRepo.GetById(e.ChefId);
@@ -47,7 +50,15 @@ namespace Services
                 //ICollection<Rating>
             };
 
-            _eventRepo.Add(newEvent);
+            var rta = _eventRepo.Add(newEvent);
+
+            foreach (string recipeId in recipesId) 
+            {
+                _eventRepo.AddEventRecipe(new EventsRecipe(){
+                    EventId = rta.Entity.EventId,
+                    RecipeId = Convert.ToInt32(recipeId)
+                });
+            }
         }
 
         public void Delete(int eventId, int chefId)
@@ -173,6 +184,11 @@ namespace Services
         public void Remove(int id)
         {
             _eventRepo.Remove(id);
+        }
+
+        public void AddEventRecipe(EventsRecipe eventRecipe)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DAO.Entities;
 using DAO.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,11 @@ namespace DAO.Repositories
             _ctx = ctx;
         }
 
-        public void Add(Event e)
+        public EntityEntry<Event> Add(Event e)
         {
-            _ctx.Events.Add(e);
+            var rta = _ctx.Events.Add(e);
             SaveChanges();
+            return rta;
         }
 
         public void Delete(Event e)
@@ -114,6 +116,12 @@ namespace DAO.Repositories
             ev.ModifiedBy = ev.ChefId.ToString();
             ev.ModifiedDate= DateTime.Now;
             _ctx.Events.Remove(ev);
+            _ctx.SaveChanges();
+        }
+
+        public void AddEventRecipe(EventsRecipe eventsRecipe)
+        {
+            _ctx.EventsRecipes.Add(eventsRecipe);
             _ctx.SaveChanges();
         }
     }

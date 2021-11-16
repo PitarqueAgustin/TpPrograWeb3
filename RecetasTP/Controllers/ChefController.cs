@@ -44,6 +44,8 @@ namespace RecetasTP.Controllers
         public IActionResult Events()
         {
             ViewBag.Layout = HttpContext.Session.GetString("layout");
+            int userId = (int) HttpContext.Session.GetInt32("userId");
+            ViewBag.Recipes = _recipeService.GetListByUser(userId);
             return View();
         }
 
@@ -51,10 +53,13 @@ namespace RecetasTP.Controllers
         [HttpPost]
         public IActionResult Events(AddEventModel e, IFormFile image)
         {
+            int userId = (int)HttpContext.Session.GetInt32("userId");
+            ViewBag.Recipes = _recipeService.GetListByUser(userId);
             if (ModelState.IsValid && image != null)
             {
+                string[] recipes = HttpContext.Request.Form["recipes[]"];
                 e.ChefId = (int)HttpContext.Session.GetInt32("userId");
-                _eventService.Add(e, image);
+                _eventService.Add(e, image, recipes);           
                 return View();
             }
             else if (image == null)
