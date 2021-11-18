@@ -42,8 +42,9 @@ namespace DAO.Repositories
             //where e.Date > GETDATE()
             //group by e.EventId
 
-            var query = from e in _ctx.Events.Include("Bookings")
-                        join b in _ctx.Bookings on e.EventId equals b.EventId
+            var query = from e in _ctx.Events
+                        join b in _ctx.Bookings on e.EventId equals b.EventId into evts
+                        from subEvts in evts.DefaultIfEmpty()
                         where e.Date > DateTime.Now.Date && e.State == 1
                         //group e by e.EventId into events
                         select e;

@@ -109,6 +109,7 @@ namespace Services
 
             for (int i = 0; i < availableList.Count; i++)
             {
+                //en vez de foreach hacer un .sum y tomar el valor de ahi
                 foreach (var book in availableList[i].Bookings)
                 {
                     sum += book.DinersAmount;
