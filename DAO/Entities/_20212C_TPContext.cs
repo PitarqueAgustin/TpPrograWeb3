@@ -38,11 +38,7 @@ namespace DAO.Entities
 
             modelBuilder.Entity<Booking>(entity =>
             {
-                entity.HasKey(e => e.RecipeId);
-
-                entity.Property(e => e.RecipeId).ValueGeneratedNever();
-
-                entity.Property(e => e.BookId).ValueGeneratedOnAdd();
+                entity.HasKey(e => e.BookId);
 
                 entity.Property(e => e.CreationDate).HasColumnType("datetime");
 
@@ -50,19 +46,19 @@ namespace DAO.Entities
                     .WithMany(p => p.Bookings)
                     .HasForeignKey(d => d.DinerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Bookings_Users");
+                    .HasConstraintName("FK_Bookings_Users");
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.Bookings)
                     .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Bookings_Events");
+                    .HasConstraintName("FK_Bookings_Events");
 
                 entity.HasOne(d => d.Recipe)
-                    .WithOne(p => p.Booking)
-                    .HasForeignKey<Booking>(d => d.RecipeId)
+                    .WithMany(p => p.Bookings)
+                    .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Bookings_Recipes");
+                    .HasConstraintName("FK_Bookings_Recipes");
             });
 
             modelBuilder.Entity<Event>(entity =>

@@ -9,6 +9,7 @@ namespace DAO.Entities
     {
         public Recipe()
         {
+            Bookings = new HashSet<Booking>();
             EventsRecipes = new HashSet<EventsRecipe>();
         }
 
@@ -27,7 +28,7 @@ namespace DAO.Entities
         public string DeletedBy { get; set; }
 
         public virtual RecipesType RecipeType { get; set; }
-        public virtual Booking Booking { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
         public virtual ICollection<EventsRecipe> EventsRecipes { get; set; }
     }
 }

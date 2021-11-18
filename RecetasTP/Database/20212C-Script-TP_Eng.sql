@@ -176,7 +176,7 @@ CREATE TABLE [dbo].[Bookings](
 	[CreationDate] [datetime] NOT NULL,
  CONSTRAINT [PK_Bookings] PRIMARY KEY CLUSTERED 
 (
-	[RecipeId] ASC
+	[BookId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -242,20 +242,20 @@ REFERENCES [dbo].[RecipesType] ([RecipeTypeId])
 GO
 ALTER TABLE [dbo].[Recipes] CHECK CONSTRAINT [FK_Recipes_RecipesType]
 GO
-ALTER TABLE [dbo].[Bookings]  WITH CHECK ADD  CONSTRAINT [Bookings_Events] FOREIGN KEY([EventId])
+ALTER TABLE [dbo].[Bookings]  WITH CHECK ADD  CONSTRAINT [FK_Bookings_Events] FOREIGN KEY([EventId])
 REFERENCES [dbo].[Events] ([EventId])
 GO
-ALTER TABLE [dbo].[Bookings] CHECK CONSTRAINT [Bookings_Events]
+ALTER TABLE [dbo].[Bookings] CHECK CONSTRAINT [FK_Bookings_Events]
 GO
-ALTER TABLE [dbo].[Bookings]  WITH CHECK ADD  CONSTRAINT [Bookings_Recipes] FOREIGN KEY([RecipeId])
+ALTER TABLE [dbo].[Bookings]  WITH CHECK ADD  CONSTRAINT [FK_Bookings_Recipes] FOREIGN KEY([RecipeId])
 REFERENCES [dbo].[Recipes] ([RecipeId])
 GO
-ALTER TABLE [dbo].[Bookings] CHECK CONSTRAINT [Bookings_Recipes]
+ALTER TABLE [dbo].[Bookings] CHECK CONSTRAINT [FK_Bookings_Recipes]
 GO
-ALTER TABLE [dbo].[Bookings]  WITH CHECK ADD  CONSTRAINT [Bookings_Users] FOREIGN KEY([DinerId])
+ALTER TABLE [dbo].[Bookings]  WITH CHECK ADD  CONSTRAINT [FK_Bookings_Users] FOREIGN KEY([DinerId])
 REFERENCES [dbo].[Users] ([UserId])
 GO
-ALTER TABLE [dbo].[Bookings] CHECK CONSTRAINT [Bookings_Users]
+ALTER TABLE [dbo].[Bookings] CHECK CONSTRAINT [FK_Bookings_Users]
 GO
 USE [master]
 GO
