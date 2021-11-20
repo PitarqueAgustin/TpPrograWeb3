@@ -43,7 +43,7 @@ namespace Services
                 Name = e.Name,
                 Picture = imageName,
                 Price = e.Price,
-                State = (int)State.Pending,
+                State = (int)State.Pendiente,
 
                 //ICollection<Booking>
                 //ICollection<EventsRecipe>
@@ -70,7 +70,7 @@ namespace Services
             ev.ModifiedBy = chef.UserId.ToString();
             ev.DeletedDate = DateTime.Now;
             ev.DeletedBy = chef.UserId.ToString();
-            ev.State = (int)State.Cancelled;
+            ev.State = (int)State.Cancelado;
 
             _eventRepo.Delete(ev);
         }
@@ -170,9 +170,9 @@ namespace Services
 
         public enum State
         {
-            Pending = 1,
-            Finished = 2,
-            Cancelled = 3
+            Pendiente = 1,
+            Finalizado = 2,
+            Cancelado = 3
         }
 
         public List<State> getStates()
