@@ -29,7 +29,7 @@ namespace DAO.Repositories
 
         public List<Recipe> GetListByUser(int chefId)
         {
-            var list = _ctx.Recipes.Where(r => r.ChefId == chefId).Where(r => r.DeletedDate == null);
+            var list = _ctx.Recipes.Where(r => r.ChefId == chefId).Where(r => r.DeletedDate == null).OrderByDescending(o => o.ModifiedDate);
             return list.ToList();
         }
 

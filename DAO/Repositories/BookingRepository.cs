@@ -24,7 +24,7 @@ namespace DAO.Repositories
 
         public List<Booking> GetListBookingsForDinerId(int dinerId)
         {
-            return _ctx.Bookings.Where(b => b.DinerId == dinerId).ToList();
+            return _ctx.Bookings.Where(b => b.DinerId == dinerId).OrderByDescending(o => o.CreationDate).ToList();
         }
     }
 }

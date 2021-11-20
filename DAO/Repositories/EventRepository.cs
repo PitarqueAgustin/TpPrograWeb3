@@ -46,6 +46,7 @@ namespace DAO.Repositories
                         join b in _ctx.Bookings on e.EventId equals b.EventId into evts
                         from subEvts in evts.DefaultIfEmpty()
                         where e.Date > DateTime.Now.Date && e.State == 1
+                        orderby e.ModifiedDate descending
                         //group e by e.EventId into events
                         select e;
             return query.ToList();
@@ -70,7 +71,7 @@ namespace DAO.Repositories
             var list = _ctx.Events.Where(e => e.ChefId == chefId);
 
             if (list.Count() > 0)
-                return list.ToList();
+                return list.OrderByDescending(o => o.ModifiedDate).ToList();
             else
                 return new List<Event>();
         }
