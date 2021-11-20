@@ -46,6 +46,8 @@ namespace RecetasTP.Controllers
             ViewBag.Layout = HttpContext.Session.GetString("layout");
             int userId = (int) HttpContext.Session.GetInt32("userId");
             ViewBag.Recipes = _recipeService.GetListByUser(userId);
+            ViewBag.Date = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
+
             return View();
         }
 

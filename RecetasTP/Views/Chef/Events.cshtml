@@ -10,6 +10,7 @@
     @TempData["Message"]
 </div>
 
+
 <div class="row w-100">
     <div class="col-md-8">
         <h3 class="display-4">Crear evento</h3>
@@ -27,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Date" class="control-label">Fecha</label>
-                <input asp-for="Date" class="form-control" type="datetime-local" id="date" name="Date" />
+                <input asp-for="Date" class="form-control" type="datetime-local" id="date" name="Date" value=@ViewBag.Date/>
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
