@@ -11,11 +11,12 @@
 
 <div class="row w-100">
     <div class="col-md-8">
-        <h3 class="display-4">Crear evento</h3>
+        <h3 class="display-4">Modificar evento</h3>
         <form asp-controller="Chef" asp-action="EditEvent" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="EventId" value="@Model.EventId" />
             <input type="hidden" asp-for="ChefId" value="@Model.ChefId" />
-
+            <input type="hidden" asp-for="Picture" value="@Model.Picture.ToString()" />
+        
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Nombre</label>
@@ -49,7 +50,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Picture" class="control-label">Imagen</label>
-                <input asp-for="Picture" class="form-control" type="file" name="image" />
+                <input asp-for="Picture" class="form-control" type="file" name="image" value=@Model.Picture.ToString() />
                 <span asp-validation-for="Picture" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -71,7 +72,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-primary" />
+                <input type="submit" value="Modificar" class="btn btn-primary" />
             </div>
         </form>
     </div>

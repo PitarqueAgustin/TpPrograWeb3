@@ -192,16 +192,8 @@ namespace RecetasTP.Controllers
             ViewBag.Layout = HttpContext.Session.GetString("layout");
             ViewBag.EventStates = _eventService.getStates();
 
-            if (image == null)
-            {
-                ModelState.AddModelError(string.Empty, "Por favor adjunte una imágen");
-                return View("EditEvent", ev);
-            }
-
             if (ModelState.IsValid)
             {
-
-
                 Event modifiedEv = new Event()
                 {
                     EventId = ev.EventId,
@@ -215,9 +207,9 @@ namespace RecetasTP.Controllers
                     Price = ev.Price,
                     State = ev.State
                 };
+
                 _eventService.Update(modifiedEv, image);
             }
-            
 
             return Redirect("/chef/profile");
         }

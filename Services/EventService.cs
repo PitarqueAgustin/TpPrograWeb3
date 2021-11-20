@@ -155,8 +155,12 @@ namespace Services
 
         public void Update(Event ev, IFormFile image)
         {
-            string imageName = CopyImage(image);
-            ev.Picture = imageName;
+            if(image != null)
+            {
+                string imageName = CopyImage(image);
+                ev.Picture = imageName;
+            }
+            
             _eventRepo.Update(ev);
         }
 
