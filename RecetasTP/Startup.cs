@@ -79,7 +79,7 @@ namespace RecetasTP
                 await next();
                 if (context.Response.StatusCode == 404)
                 {
-                    context.Request.Path = "/Login";
+                    context.Request.Path = "/Default";
                     await next();
                 }
             });
