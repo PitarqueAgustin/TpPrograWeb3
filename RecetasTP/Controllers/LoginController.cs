@@ -21,12 +21,12 @@ namespace RecetasTP.Controllers
         }
 
 
-        public IActionResult Index ()
+        public IActionResult Index()
         {
             ViewBag.Layout = HttpContext.Session.GetString("layout");
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult Index(LoginModel model)
         {
@@ -57,6 +57,38 @@ namespace RecetasTP.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Default");
+        }
+
+
+
+        [HttpGet]
+        [Route("register")]
+        public IActionResult Add()
+        {
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
+            return View();
+        }
+
+        [HttpPost()]
+        [Route("register")]
+        public IActionResult Add(AddUserModel userModel) // binding automático entre el modelo y la entrada de datos a travez del campo name del form
+        {
+            if (ModelState.IsValid)
+            {
+                if (_userService.IsValidPassword(userModel.Password))
+                {
+                    if (_userService.IsMailAvailable(userModel.Email))
+                    {
+                        _userService.Add(userModel);
+                        return Redirect("/default");
+                    }
+                    ModelState.AddModelError(string.Empty, "El mail ingresado no está disponible");
+                    return View(userModel);
+                }
+            }
+
+            ModelState.AddModelError(string.Empty, "Password no cumple con expresión regular");
+            return View(userModel);
         }
     }
 }
