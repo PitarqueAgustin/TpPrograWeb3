@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DAO.Entities
@@ -72,5 +73,11 @@ namespace DAO.Entities
             }
             return false;
         }
+    }
+
+    public class AvailableEvent
+    {
+        public Event Ev { get; set; }
+        public int FreeSlots { get; set; }
     }
 }

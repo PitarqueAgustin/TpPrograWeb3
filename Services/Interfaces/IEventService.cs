@@ -13,7 +13,6 @@ namespace Services.Interfaces
         public Event GetById(int id);
         public void Delete(int eventId, int chefId);
         public List<Event> GetListByUser(int chefId);
-        public Tuple<List<Event>, List<int>> GetAvailables();
         public List<Event> GetLastEventsEnded();
         public List<double> GetAverageRating(List<Event> lastEvents);
         public List<string> GetCommentsForEventId(int id);
@@ -22,5 +21,8 @@ namespace Services.Interfaces
         public List<State> getStates();
         public void Remove(int id);
         public void AddEventRecipe(EventsRecipe eventRecipe);
+        public int GetReservedSpotsById(int id);
+        public List<AvailableEvent> GetAvailableEvents();
+
     }
 }

@@ -40,12 +40,7 @@ namespace RecetasTP.Controllers
                 throw new ArgumentException("Id inválido");
             }
 
-            var availableEvents = _eventService.GetAvailables();
-            DinerBookViewModel model = new DinerBookViewModel
-            {
-                eventsList = availableEvents.Item1,
-                availableDiners = availableEvents.Item2
-            };
+            List<AvailableEvent> model = _eventService.GetAvailableEvents();
 
             return View(model);
         }
@@ -63,7 +58,8 @@ namespace RecetasTP.Controllers
                 evnt = ev,
                 evntChef = _userService.GetById(ev.ChefId),
                 ReservedAmount = 0,
-                RecipeId = 0
+                RecipeId = 0,
+                AvailableSpots = (ev.DinersAmount - _eventService.GetReservedSpotsById(id))
             };
 
             return View(model);

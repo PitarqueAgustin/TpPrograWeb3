@@ -100,32 +100,27 @@ namespace Services
             return _eventRepo.GetListByUser(chefId);
         }
 
-        public Tuple<List<Event>, List<int>> GetAvailables()
+        public List<AvailableEvent> GetAvailableEvents()
         {
-            var availableList = _eventRepo.GetAvailables().Distinct().ToList();
-            int sum = 0;
-            List<int> _availableDiners = new List<int>(new int[availableList.Count]);
-
-
-            for (int i = 0; i < availableList.Count; i++)
+            List<Event> eventList = _eventRepo.GetAvailables().Distinct().ToList(); ;
+            List<AvailableEvent> availableEvents = new List<AvailableEvent>();
+            for(int i = 0; i < eventList.Count; i++)
             {
-                //en vez de foreach hacer un .sum y tomar el valor de ahi
-                foreach (var book in availableList[i].Bookings)
+                AvailableEvent temp = new AvailableEvent()
                 {
-                    sum += book.DinersAmount;
-                }
-                if (sum >= availableList[i].DinersAmount)
+                    Ev = eventList[i],
+                    FreeSlots = eventList[i].DinersAmount - _eventRepo.GetReservedSpotsById(eventList[i].EventId),
+                };
+
+                if (temp.FreeSlots > 0)
                 {
-                    availableList.RemoveAt(i);
-                    _availableDiners.RemoveAt(i);
+                    availableEvents.Add(temp);
                 }
-                _availableDiners[i] = sum;
-                sum = 0;
             }
-
-            return Tuple.Create(availableList, _availableDiners);
+            
+            return availableEvents;
         }
-
+        
         public List<int> GetReservedSpots(List<Event> eventList)
         {
             List<int> reservedSpots = new List<int>();
@@ -190,6 +185,11 @@ namespace Services
         public void AddEventRecipe(EventsRecipe eventRecipe)
         {
             throw new NotImplementedException();
+        }
+
+        public int GetReservedSpotsById(int id)
+        {
+            return _eventRepo.GetReservedSpotsById(id);
         }
     }
 }

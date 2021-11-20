@@ -23,7 +23,7 @@
                         <p class="event-name">@Model.evnt.Name</p>
                         <p class="event-name">$ @Model.evnt.Price</p>
                         <p class="event-rating">Fecha: @Model.evnt.Date</p>
-                        <p class="event-rating">Total comensales: @Model.evnt.DinersAmount</p>
+                        <p class="event-rating">Total comensales: @Model.AvailableSpots</p>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ReservedAmount" class="control-label">Cantidad de comensales:</label>
-                <input asp-for="ReservedAmount" class="form-control" min="1" type="number" />
+                <input asp-for="ReservedAmount" class="form-control" min="1" max="@Model.AvailableSpots" type="number" />
                 <span asp-validation-for="ReservedAmount" class="text-danger"></span>
             </div>
             <div class="form-group">

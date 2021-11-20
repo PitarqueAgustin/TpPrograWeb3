@@ -1,4 +1,6 @@
-﻿@model RecetasTP.Models.DinerBookViewModel
+﻿@using DAO.Entities
+@*@model RecetasTP.Models.DinerBookViewModel*@
+@model List<DAO.Entities.AvailableEvent>
 @{
     Layout = ViewBag.Layout;
     ViewData["Title"] = "Default Page";
@@ -13,19 +15,19 @@
     </div>
 
     <div class="events">
-        @for (int i = 0; i < Model.eventsList.Count; i++)
+        
+        @foreach(AvailableEvent e in Model)
         {
-        <a href="/diner/book/@Model.eventsList[i].EventId">
+        <a href="/diner/book/@e.Ev.EventId">
             <div class="event">
                 <div class="event-thumb-container">
-                    <img src="~/img/@Model.eventsList[i].Picture" alt="thumbnail" class="event-thumbnail" />
+                    <img src="~/img/@e.Ev.Picture" alt="thumbnail" class="event-thumbnail" />
                 </div>
                 <div class="event-description">
-                    <p class="event-index" id="index">@((i+1))</p>
-                    <p class="event-name">@Model.eventsList[i].Name</p>
-                    <p class="event-name">$ @Model.eventsList[i].Price</p>
-                    <p class="event-rating">@Model.eventsList[i].Date</p>
-                    <p class="event-rating">Cupos disponibles: @((@Model.eventsList[i].DinersAmount - @Model.availableDiners[i]).ToString())</p>
+                    <p class="event-name">@e.Ev.Name</p>
+                    <p class="event-name">$ @e.Ev.Price</p>
+                    <p class="event-rating">@e.Ev.Date</p>
+                    <p class="event-rating">Cupos disponibles: @e.FreeSlots</p>
                 </div>
             </div>
         </a>

@@ -10,5 +10,6 @@ namespace RecetasTP.Models
         public User evntChef { get; set; }
         public int ReservedAmount { get; set; }
         public int RecipeId { get; set; }
+        public int AvailableSpots { get; set; }
     }
 }
