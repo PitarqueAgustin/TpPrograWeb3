@@ -20,5 +20,6 @@ namespace DAO.Repositories.Interfaces
         public void Update(Event ev);
         public void Remove(int id);
         public void AddEventRecipe(EventsRecipe eventsRecipe);
+        public bool IsEventBelongToUser(int eventId, int chefId);
     }
 }

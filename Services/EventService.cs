@@ -191,5 +191,10 @@ namespace Services
         {
             return _eventRepo.GetReservedSpotsById(id);
         }
+
+        public bool IsEventBelongToUser(int eventId, int chefId)
+        {
+            return _eventRepo.IsEventBelongToUser(eventId, chefId);
+        }
     }
 }

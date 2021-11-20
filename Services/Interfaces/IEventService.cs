@@ -23,6 +23,7 @@ namespace Services.Interfaces
         public void AddEventRecipe(EventsRecipe eventRecipe);
         public int GetReservedSpotsById(int id);
         public List<AvailableEvent> GetAvailableEvents();
+        public bool IsEventBelongToUser(int eventId, int chefId);
 
     }
 }

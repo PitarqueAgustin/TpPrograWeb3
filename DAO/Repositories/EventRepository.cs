@@ -125,5 +125,10 @@ namespace DAO.Repositories
             _ctx.EventsRecipes.Add(eventsRecipe);
             _ctx.SaveChanges();
         }
+
+        public bool IsEventBelongToUser(int eventId, int chefId)
+        {
+            return _ctx.Events.Where(e => e.EventId == eventId && e.ChefId == chefId).Any();
+        }
     }
 }
