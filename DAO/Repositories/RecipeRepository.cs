@@ -27,6 +27,12 @@ namespace DAO.Repositories
             _ctx.SaveChanges();
         }
 
+        public void AddRecipeType(RecipesType newRecipeType)
+        {
+            _ctx.RecipesTypes.Add(newRecipeType);
+            _ctx.SaveChanges();
+        }
+
         public List<Recipe> GetListByUser(int chefId)
         {
             var list = _ctx.Recipes.Where(r => r.ChefId == chefId).Where(r => r.DeletedDate == null).OrderByDescending(o => o.ModifiedDate);

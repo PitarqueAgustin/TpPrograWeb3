@@ -36,6 +36,23 @@ namespace RecetasTP.Controllers
         public IActionResult Recipe(AddRecipeModel recipe)
         {
             recipe.ChefId = (int)HttpContext.Session.GetInt32("userId");
+
+            string newRecipeType = Request.Form["newRecipeType"];
+            if (!string.IsNullOrEmpty(newRecipeType))
+            {
+                //Raza nuevaRaza = new Raza();
+                //nuevaRaza.Nombre = otraRaza;
+                RecipesType addRecipeType = new RecipesType();
+                addRecipeType.Name = newRecipeType;
+
+
+                //_razaService.Crear(nuevaRaza);
+                _recipeService.AddRecipeType(addRecipeType);
+
+                //perro.IdRaza = nuevaRaza.IdRaza;
+                recipe.RecipeTypeId = addRecipeType.RecipeTypeId;
+            }
+
             _recipeService.Add(recipe);
             return Redirect("/");
         }

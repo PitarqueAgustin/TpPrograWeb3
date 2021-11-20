@@ -43,9 +43,12 @@
                         <option value="@type.RecipeTypeId">@type.Name</option>
                     }
                 </select>
+            </div>
+            <div class="form-group">  
+                <label class="control-label">Agregar tipo de receta</label>
+                <input type="text" name="newRecipeType" class="form-control" />
                 <span asp-validation-for="RecipeTypeId" class="text-danger"></span>
             </div>
-            
             <div class="form-group">
                 <input type="submit" value="Registrar" class="btn btn-primary" />
             </div>

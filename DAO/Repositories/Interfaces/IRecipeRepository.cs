@@ -17,5 +17,6 @@ namespace DAO.Repositories.Interfaces
         public void Update(Recipe recipe);
         public void Remove(int recipeId);
         public List<Recipe> GetRecipesFromEventId(int eventId);
+        void AddRecipeType(RecipesType newRecipeType);
     }
 }
