@@ -1,0 +1,7 @@
+Credenciales:
+
+chef@tasty.com
+TastyEvents1
+
+diner@tasty.com
+TastyEvents1
