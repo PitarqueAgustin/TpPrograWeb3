@@ -76,6 +76,28 @@
             </div>
         </form>
     </div>
+
+    <div class="col-md-4">
+        @*<h4>Hola</h4>*@
+        <div class="container ">
+            <div class="row">
+                <div class="events noFlex col-4">
+                    <div class="event">
+                        <div class="event-thumb-container">
+                            <img src="~/img/@Model.Picture" alt="thumbnail" class="event-thumbnail" />
+                        </div>
+                        <div class="event-description">
+                            <p class="event-name">@Model.Name</p>
+                            <p class="event-name">$ @Model.Price</p>
+                            <p class="event-rating">Fecha: @Model.Date</p>
+                            <p class="event-rating">Total comensales: @Model.DinersAmount</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 @section Scripts
