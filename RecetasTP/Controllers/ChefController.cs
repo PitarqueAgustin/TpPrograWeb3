@@ -194,10 +194,14 @@ namespace RecetasTP.Controllers
         [HttpGet]
         public IActionResult EditEvent(int id)
         {
+            TempData["Message"] = "";
+            int userId = (int)HttpContext.Session.GetInt32("userId");
             ViewBag.Layout = HttpContext.Session.GetString("layout");
             ViewBag.EventStates = _eventService.getStates();
-            
+            ViewBag.Recipes = _recipeService.GetListByUser(userId);
+
             Event ev = _eventService.GetById(id);
+            ev.EventsRecipes = _eventService.GetEventsRecipes(ev.EventId);
 
             return View(ev);
         }
@@ -208,27 +212,39 @@ namespace RecetasTP.Controllers
         {
             ViewBag.Layout = HttpContext.Session.GetString("layout");
             ViewBag.EventStates = _eventService.getStates();
+            string[] recipes = HttpContext.Request.Form["recipes[]"];
 
-            if (ModelState.IsValid)
+            if (recipes.Length > 0)
             {
-                Event modifiedEv = new Event()
+                if (ModelState.IsValid)
                 {
-                    EventId = ev.EventId,
-                    ChefId = ev.ChefId,
-                    Name = ev.Name,
-                    Description = ev.Description,
-                    Date = ev.Date,
-                    DinersAmount = ev.DinersAmount,
-                    Location = ev.Location,
-                    Picture = ev.Picture,
-                    Price = ev.Price,
-                    State = ev.State
-                };
+                    Event modifiedEv = new Event()
+                    {
+                        EventId = ev.EventId,
+                        ChefId = ev.ChefId,
+                        Name = ev.Name,
+                        Description = ev.Description,
+                        Date = ev.Date,
+                        DinersAmount = ev.DinersAmount,
+                        Location = ev.Location,
+                        Picture = ev.Picture,
+                        Price = ev.Price,
+                        State = ev.State
+                    };
 
-                _eventService.Update(modifiedEv, image);
+                    _eventService.Update(modifiedEv, image, recipes);
+                }
+                
+                return Redirect("/chef/profile");
+            }
+            else 
+            {
+                int userId = (int)HttpContext.Session.GetInt32("userId");
+                ViewBag.Recipes = _recipeService.GetListByUser(userId);
+                TempData["Message"] = "*Debe elegir al menos una receta";
+                return View(nameof(EditEvent),ev);
             }
 
-            return Redirect("/chef/profile");
         }
 
         [Route("chef/events/{id}/delete")]

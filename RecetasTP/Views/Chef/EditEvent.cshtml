@@ -3,7 +3,9 @@
 @{
     Layout = ViewBag.Layout;
     ViewData["Title"] = "Modificar evento";
+    List<DAO.Entities.Recipe> recipes = ViewBag.Recipes;
 }
+
 
 <div class="row">
     @TempData["Message"]
@@ -16,7 +18,7 @@
             <input type="hidden" asp-for="EventId" value="@Model.EventId" />
             <input type="hidden" asp-for="ChefId" value="@Model.ChefId" />
             <input type="hidden" asp-for="Picture" value="@Model.Picture.ToString()" />
-        
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Nombre</label>
@@ -45,7 +47,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label">Precio</label>
-                <input asp-for="Price" class="form-control" min="1" type="number" />
+                <input asp-for="Price" class="form-control" step="0.01" value="@Model.Price.ToString().Replace(",",".")" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -57,8 +59,8 @@
                 <label asp-for="State" class="control-label">Estado</label>
                 <select asp-for="State" class="form-control">
                     @for (var i = 0; i < ViewBag.EventStates.Count; i++)
-                   {
-                       if (Model.State-1 == i)
+                    {
+                        if (Model.State - 1 == i)
                         {
                             <option value="@(i+1)" selected>@ViewBag.EventStates[i]</option>
                         }
@@ -66,11 +68,41 @@
                         {
                             <option value="@(i+1)">@ViewBag.EventStates[i]</option>
                         }
-                   }
+                    }
                 </select>
                 <span asp-validation-for="State" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label>Recetas del chef</label>
+                @foreach (var recipe in recipes)
+                {
 
+                    var exists = false;
+
+                    @if (Model.EventsRecipes.Where(er => er.Recipe == recipe).Count() > 0) 
+                    {
+                        exists = true;
+                    }
+                     
+                    <div class="form-check">
+                        @if(exists)
+                        {
+                            <input class="form-check-input" type="checkbox" name="recipes[]" value="@recipe.RecipeId" id="recipe" checked>
+                        }
+                        else 
+                        {
+                            <input class="form-check-input" type="checkbox" name="recipes[]" value="@recipe.RecipeId" id="recipe">
+                        }
+                        <label class="form-check-label" for="recipe">
+                            @recipe.Name
+                        </label>
+                    </div>
+                }
+                @if (!String.IsNullOrEmpty(TempData["Message"].ToString())) 
+                {
+                    <span class="text-danger">@TempData["Message"]</span>
+                }
+            </div>
             <div class="form-group">
                 <input type="submit" value="Modificar" class="btn btn-primary" />
             </div>

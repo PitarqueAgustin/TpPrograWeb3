@@ -127,9 +127,20 @@ namespace DAO.Repositories
             _ctx.SaveChanges();
         }
 
+        public void DeleteAllEventRecipe(int eventId) 
+        {
+            _ctx.EventsRecipes.RemoveRange(GetEventsRecipes(eventId));
+            _ctx.SaveChanges();
+        }
+
         public bool IsEventBelongToUser(int eventId, int chefId)
         {
             return _ctx.Events.Where(e => e.EventId == eventId && e.ChefId == chefId).Any();
+        }
+
+        public List<EventsRecipe> GetEventsRecipes(int eventId)
+        {
+            return _ctx.EventsRecipes.Where(er=> er.EventId == eventId).ToList();
         }
     }
 }

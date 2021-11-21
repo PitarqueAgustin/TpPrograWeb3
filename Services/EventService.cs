@@ -153,7 +153,7 @@ namespace Services
             return _eventRepo.GetCommentsForEventId(id);
         }
 
-        public void Update(Event ev, IFormFile image)
+        public void Update(Event ev, IFormFile image, string[] recipesId)
         {
             if(image != null)
             {
@@ -162,6 +162,17 @@ namespace Services
             }
             
             _eventRepo.Update(ev);
+
+            _eventRepo.DeleteAllEventRecipe(ev.EventId);
+
+            foreach (string recipeId in recipesId)
+            {
+                _eventRepo.AddEventRecipe(new EventsRecipe()
+                {
+                    EventId = ev.EventId,
+                    RecipeId = Convert.ToInt32(recipeId)
+                });
+            }
         }
 
         internal class Tbl_News
@@ -199,6 +210,11 @@ namespace Services
         public bool IsEventBelongToUser(int eventId, int chefId)
         {
             return _eventRepo.IsEventBelongToUser(eventId, chefId);
+        }
+
+        public List<EventsRecipe> GetEventsRecipes(int eventId)
+        {
+            return _eventRepo.GetEventsRecipes(eventId);
         }
     }
 }
