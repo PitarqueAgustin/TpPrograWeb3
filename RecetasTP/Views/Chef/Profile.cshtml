@@ -31,8 +31,10 @@
                                 @Model.chef.RegistrationDate <i class="bi bi-calendar2-date"></i>
                             </cite>
                         </small>
-                        <p>
+                        <p class="blackText">
                             <i class="glyphicon glyphicon-envelope"></i>@Model.chef.Email
+                            <br />
+                            <i class="glyphicon glyphicon-envelope"></i>Cantidad eventos: @Model.eventsList.Count
                             <br />
                             <i class="glyphicon glyphicon-envelope"></i>Cantidad recetas: @Model.recipesCount
                             <br />

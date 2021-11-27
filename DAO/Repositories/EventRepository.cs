@@ -25,6 +25,7 @@ namespace DAO.Repositories
 
         public void Delete(Event e)
         {
+
             SaveChanges();
         }
 

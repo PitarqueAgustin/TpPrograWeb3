@@ -63,9 +63,6 @@ namespace RecetasTP.Controllers
             };
 
             return View(model);
-            // Mostrar caracteristicas del evento
-            // + SELECT de las recetas
-            // + Cantidad comensales
         }
 
         [Route("/diner/book")]

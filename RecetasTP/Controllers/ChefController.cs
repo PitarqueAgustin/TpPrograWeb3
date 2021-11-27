@@ -40,21 +40,16 @@ namespace RecetasTP.Controllers
             string newRecipeType = Request.Form["newRecipeType"];
             if (!string.IsNullOrEmpty(newRecipeType))
             {
-                //Raza nuevaRaza = new Raza();
-                //nuevaRaza.Nombre = otraRaza;
                 RecipesType addRecipeType = new RecipesType();
                 addRecipeType.Name = newRecipeType;
 
-
-                //_razaService.Crear(nuevaRaza);
                 _recipeService.AddRecipeType(addRecipeType);
 
-                //perro.IdRaza = nuevaRaza.IdRaza;
                 recipe.RecipeTypeId = addRecipeType.RecipeTypeId;
             }
 
             _recipeService.Add(recipe);
-            return Redirect("/");
+            return RedirectToAction("Profile");
         }
 
         [Route("chef/events")]
@@ -63,7 +58,7 @@ namespace RecetasTP.Controllers
             ViewBag.Layout = HttpContext.Session.GetString("layout");
             int userId = (int) HttpContext.Session.GetInt32("userId");
             ViewBag.Recipes = _recipeService.GetListByUser(userId);
-            ViewBag.Date = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
+            ViewBag.Date = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm");
 
             return View();
         }
@@ -74,21 +69,33 @@ namespace RecetasTP.Controllers
         {
             int userId = (int)HttpContext.Session.GetInt32("userId");
             ViewBag.Recipes = _recipeService.GetListByUser(userId);
-            if (ModelState.IsValid && image != null)
+            ViewBag.Layout = HttpContext.Session.GetString("layout");
+            string[] recipes = HttpContext.Request.Form["recipes[]"];
+            
+            if (recipes.Length > 0)
             {
-                string[] recipes = HttpContext.Request.Form["recipes[]"];
-                e.ChefId = (int)HttpContext.Session.GetInt32("userId");
-                _eventService.Add(e, image, recipes);           
-                return View();
+                if (ModelState.IsValid && image != null)
+                {
+                
+                    e.ChefId = (int)HttpContext.Session.GetInt32("userId");
+                    _eventService.Add(e, image, recipes);           
+                    return RedirectToAction("Profile");
+                }
+                else if (image == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Por favor adjunte una imágen");
+                    return View("Events", e);
+                }
+
+                ModelState.AddModelError(string.Empty, "Error en el formulario.");
+                return View("Events", e);
             }
-            else if (image == null)
+            else
             {
-                ModelState.AddModelError(string.Empty, "Por favor adjunte una imágen");
+                ModelState.AddModelError(string.Empty, "*Debe elegir al menos una receta");
                 return View("Events", e);
             }
 
-            ModelState.AddModelError(string.Empty, "Error en el formulario.");
-            return View("Events", e);
         }
 
         [Route("chef/cancel/{id}")]

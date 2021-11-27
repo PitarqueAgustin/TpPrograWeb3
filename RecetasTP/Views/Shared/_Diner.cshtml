@@ -6,7 +6,9 @@
 @section Menu {
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Default" asp-action="Index">RecetasTP</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Default" asp-action="Index">
+                <img src="~/assets/logoNav.png" alt="thumbnail" class="resizeLogo"/>
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,6 +31,12 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
                     </li>
                 </ul>
+            </div>
+            <div class="displayInline">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                </svg>
+                @TempData["value"]
             </div>
         </div>
     </nav>

@@ -2,7 +2,7 @@
 
 @{
     Layout = ViewBag.Layout;
-    ViewData["Title"] = "Agregar usuario";
+    ViewData["Title"] = "Registro";
 }
 
 <div class="row">
@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <h3 class="display-4">Agregar usuario</h3>
+        <h3 class="display-4">Registro</h3>
         <form asp-controller="Login" asp-action="Add" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -35,7 +35,7 @@
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="Rol" type="radio" id="Diner"  value="1" />
+                <input asp-for="Rol" type="radio" id="Diner" checked="checked" value="1" />
                 <label asp-for="Rol" class="control-label">Diner</label>
                 <span asp-validation-for="Rol" class="text-danger"></span>
                 <input asp-for="Rol" type="radio" id="Chef" value="2" />

@@ -25,8 +25,8 @@
                 <div class="event-description">
                     <p class="event-index" id="index">@((i+1))</p>
                     <p class="event-name">@Model.eventsList[i].Name</p>
-                    <p class="event-name">$ @Model.eventsList[i].Price</p>
-                    <p class="event-rating">@Model.avgEventRatings[i].ToString("0.0")</p>
+                    <p class="">$ @Model.eventsList[i].Price</p>
+                    <p class="event-rating">★ @Model.avgEventRatings[i].ToString("0.0")</p>
                 </div>
             </div>
         </a>

@@ -9,6 +9,9 @@
     @*@TempData["Message"]*@
 </div>
 <br />
+<div class="col-md-8">
+</div>
+
 <div class="row w-100">
     <div class="col-md-4">
         <form asp-action="Index" method="post">
@@ -30,10 +33,14 @@
             </div>
         </form>
     </div>
+    <div class="col-md-8">
+        <img src="~/assets/Logo2.png" alt="thumbnail" />
+    </div>
+
 </div>
 
 <div>
-    <a asp-action="register" asp-controller="Login">No estas registrado?</a>
+    <a asp-action="Add" asp-controller="Login">No estas registrado?</a>
 </div>
 
 @section Scripts
