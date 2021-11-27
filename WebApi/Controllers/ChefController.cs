@@ -28,7 +28,7 @@ namespace WebApi.Controllers
 
             if(_eventService.IsEventBelongToUser(eventId, chefId))
             {
-                _eventService.Delete(eventId, chefId);
+                _eventService.Remove(eventId);
                 return Ok();
             }
             else

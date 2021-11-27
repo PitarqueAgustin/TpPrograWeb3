@@ -9,7 +9,6 @@ namespace DAO.Repositories.Interfaces
         public List<Event> GetAll();
         public EntityEntry<Event> Add(Event e);
         public Event GetById(int id);
-        public void Delete(Event e);
         public void SaveChanges();
         public List<Event> GetListByUser(int chefId);
         public List<Event> GetAvailables();

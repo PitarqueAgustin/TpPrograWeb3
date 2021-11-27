@@ -23,15 +23,9 @@ namespace DAO.Repositories
             return rta;
         }
 
-        public void Delete(Event e)
-        {
-
-            SaveChanges();
-        }
-
         public List<Event> GetAll()
         {
-            return _ctx.Events.OrderBy(e => e.CreatedDate).ToList();
+            return _ctx.Events.OrderBy(e => e.CreatedDate).Where(e => e.DeletedDate == null).ToList();
         }
 
         public List<Event> GetAvailables()
@@ -46,7 +40,7 @@ namespace DAO.Repositories
             var query = from e in _ctx.Events
                         join b in _ctx.Bookings on e.EventId equals b.EventId into evts
                         from subEvts in evts.DefaultIfEmpty()
-                        where e.Date > DateTime.Now.Date && e.State == 1
+                        where e.Date > DateTime.Now.Date && e.State == 1 && e.DeletedDate == null
                         orderby e.ModifiedDate descending
                         //group e by e.EventId into events
                         select e;
@@ -62,14 +56,15 @@ namespace DAO.Repositories
         {
             var query = _ctx.Events.Where(e => e.Ratings.Any()
                                             && e.State == 2
-                                            && e.Date < DateTime.Now.Date)
+                                            && e.Date < DateTime.Now.Date
+                                            && e.DeletedDate == null)
                                     .OrderByDescending(e => e.Date).Take(6);
             return query.ToList();
         }
 
         public List<Event> GetListByUser(int chefId)
         {
-            var list = _ctx.Events.Where(e => e.ChefId == chefId);
+            var list = _ctx.Events.Where(e => e.ChefId == chefId && e.DeletedDate == null);
 
             if (list.Count() > 0)
                 return list.OrderByDescending(o => o.ModifiedDate).ToList();
@@ -118,7 +113,8 @@ namespace DAO.Repositories
             ev.DeletedDate = DateTime.Now;
             ev.ModifiedBy = ev.ChefId.ToString();
             ev.ModifiedDate= DateTime.Now;
-            _ctx.Events.Remove(ev);
+            ev.State = (int)State.Cancelado;
+            _ctx.Events.Update(ev);
             _ctx.SaveChanges();
         }
 
@@ -142,6 +138,13 @@ namespace DAO.Repositories
         public List<EventsRecipe> GetEventsRecipes(int eventId)
         {
             return _ctx.EventsRecipes.Where(er=> er.EventId == eventId).ToList();
+        }
+
+        public enum State
+        {
+            Pendiente = 1,
+            Finalizado = 2,
+            Cancelado = 3
         }
     }
 }

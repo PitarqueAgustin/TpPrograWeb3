@@ -11,7 +11,6 @@ namespace Services.Interfaces
         public List<Event> GetAll();
         public void Add(AddEventModel e, IFormFile image, string[] recipesId);
         public Event GetById(int id);
-        public void Delete(int eventId, int chefId);
         public List<Event> GetListByUser(int chefId);
         public List<Event> GetLastEventsEnded();
         public List<double> GetAverageRating(List<Event> lastEvents);

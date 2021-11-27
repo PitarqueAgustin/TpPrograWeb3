@@ -102,14 +102,12 @@ namespace RecetasTP.Controllers
         [HttpGet]
         public IActionResult Cancel(int id)
         {
-            int chefId = (int)HttpContext.Session.GetInt32("userId");
-
             if (id == 0)
             {
                 throw new ArgumentException("Evento inválido");
             }
 
-            _eventService.Delete(id, chefId);
+            _eventService.Remove(id);
             return RedirectToAction("Profile");
         }
 

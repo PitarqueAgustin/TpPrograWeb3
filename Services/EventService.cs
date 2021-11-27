@@ -61,20 +61,6 @@ namespace Services
             }
         }
 
-        public void Delete(int eventId, int chefId)
-        {
-            Event ev = _eventRepo.GetById(eventId);
-            User chef = _userRepo.GetById(chefId);
-
-            ev.ModifiedDate = DateTime.Now;
-            ev.ModifiedBy = chef.UserId.ToString();
-            ev.DeletedDate = DateTime.Now;
-            ev.DeletedBy = chef.UserId.ToString();
-            ev.State = (int)State.Cancelado;
-
-            _eventRepo.Delete(ev);
-        }
-
         public List<Event> GetAll()
         {
             return _eventRepo.GetAll();
