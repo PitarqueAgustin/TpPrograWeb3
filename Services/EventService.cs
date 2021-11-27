@@ -44,10 +44,6 @@ namespace Services
                 Picture = imageName,
                 Price = e.Price,
                 State = (int)State.Pendiente,
-
-                //ICollection<Booking>
-                //ICollection<EventsRecipe>
-                //ICollection<Rating>
             };
 
             var rta = _eventRepo.Add(newEvent);

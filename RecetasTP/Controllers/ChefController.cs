@@ -76,7 +76,6 @@ namespace RecetasTP.Controllers
             {
                 if (ModelState.IsValid && image != null)
                 {
-                
                     e.ChefId = (int)HttpContext.Session.GetInt32("userId");
                     _eventService.Add(e, image, recipes);           
                     return RedirectToAction("Profile");
