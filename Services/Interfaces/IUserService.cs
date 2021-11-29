@@ -18,7 +18,7 @@ namespace Services.Interfaces
         public bool Validate(string email, string password);
         public User GetByEmail(string email);
         public bool IsMailAvailable(string mail);
-        public bool IsValidPassword(string pass);
         public string CreateMD5(string pass);
+        //public bool IsValidPassword(string pass);
     }
 }

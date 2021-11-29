@@ -80,13 +80,6 @@ namespace Services
             return _userRepo.IsMailAvailable(mail);
         }
 
-        public bool IsValidPassword(string pass)
-        {
-            Regex regex = new Regex(@"^([A-Z])(?=.*\d)(?=.*[a - zA - Z]).{7,}$");
-            bool isValidated = regex.IsMatch(pass);
-            return isValidated;
-        }
-
         public string CreateMD5(string input)
         {
             // Use input string to calculate MD5 hash
@@ -104,5 +97,12 @@ namespace Services
                 return sb.ToString().Substring(0, 30);
             }
         }
+
+        //public bool IsValidPassword(string pass)
+        //{
+        //    Regex regex = new Regex(@"^([A-Z])(?=.*\d)(?=.*[a - zA - Z]).{7,}$");
+        //    bool isValidated = regex.IsMatch(pass);
+        //    return isValidated;
+        //}
     }
 }

@@ -77,16 +77,13 @@ namespace RecetasTP.Controllers
 
             if (ModelState.IsValid)
             {
-                if (_userService.IsValidPassword(userModel.Password))
+                if (_userService.IsMailAvailable(userModel.Email))
                 {
-                    if (_userService.IsMailAvailable(userModel.Email))
-                    {
-                        _userService.Add(userModel);
-                        return Redirect("/default");
-                    }
-                    ModelState.AddModelError(string.Empty, "El mail ingresado no está disponible");
-                    return View(userModel);
+                    _userService.Add(userModel);
+                    return Redirect("/default");
                 }
+                ModelState.AddModelError(string.Empty, "El mail ingresado no está disponible");
+                return View(userModel);
             }
 
             ModelState.AddModelError(string.Empty, "Password no cumple con expresión regular");

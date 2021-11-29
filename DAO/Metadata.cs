@@ -44,9 +44,13 @@ namespace DAO.Entities
         [Required(ErrorMessage = "Campo obligatorio")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Campo obligatorio")]
+        [RegularExpression(@"^([A-Z])(?=.*\d)(?=.*[a - zA - Z]).{7,}$",
+         ErrorMessage = "No cumple con restricción clave")]
         public string Password { get; set; }
         [Compare("Password", ErrorMessage = "Los passwords no son iguales")]
         [Required(ErrorMessage = "Campo obligatorio")]
+        [RegularExpression(@"^([A-Z])(?=.*\d)(?=.*[a - zA - Z]).{7,}$",
+         ErrorMessage = "No cumple con restricción clave")]
         public string ConfirmPassword { get; set; }
         [Required(ErrorMessage = "Campo obligatorio")]
         public int Rol { get; set; }
