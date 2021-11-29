@@ -47,7 +47,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label">Precio</label>
-                <input asp-for="Price" class="form-control" step="0.01" value="@Model.Price.ToString().Replace(",",".")" />
+                <input asp-for="Price" class="form-control" value="@Model.Price.ToString().Remove(Model.Price.ToString().IndexOf(","))" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
