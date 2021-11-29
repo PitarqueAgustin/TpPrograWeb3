@@ -55,7 +55,7 @@ namespace RecetasTP.Controllers
             {
                 evnt = _evnt,
                 evntChef = _userService.GetById(_evnt.ChefId),
-                evntComments = _eventService.GetCommentsForEventId(id)
+                evntComments = _eventService.GetRatingForEventId(id)
             };
 
             return View(eventDetails);

@@ -40,25 +40,21 @@
 @* Comments *@
 <div>
     <h5>Comentarios</h5>
-    <table class="table profileTable">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Descripción</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{ int rowNum2 = 0; }
-            @foreach (var com in Model.evntComments)
-            {
-                <tr>
-                    <th scope="row">@(rowNum2 += 1)</th>
-                    <td>@com</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <ol class="list-group list-group-numbered">
+       @{ int rowNum2 = 0; }
+       @foreach (var com in Model.evntComments)
+       {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold"><b>@(rowNum2 += 1)</b></div>
+                @com.Comments
+            </div>
+            <span class="badge bg-primary rounded-pill text-light">@com.Rating1</span>
+            </li>
+       }
+    </ol>
 </div>
+
 
 @section Scripts
     {

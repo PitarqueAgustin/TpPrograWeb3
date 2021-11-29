@@ -7,6 +7,6 @@ namespace RecetasTP.Models
     {
         public Event evnt { get; set; }
         public User evntChef { get; set; }
-        public List<string> evntComments { get; set; }
+        public List<Rating> evntComments { get; set; }
     }
 }

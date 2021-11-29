@@ -14,7 +14,7 @@ namespace Services.Interfaces
         public List<Event> GetListByUser(int chefId);
         public List<Event> GetLastEventsEnded();
         public List<double> GetAverageRating(List<Event> lastEvents);
-        public List<string> GetCommentsForEventId(int id);
+        public List<Rating> GetRatingForEventId(int id);
         public List<int> GetReservedSpots(List<Event> eventList);
         public void Update(Event ev, IFormFile image, string[] recipes);
         public List<State> getStates();

@@ -130,9 +130,9 @@ namespace Services
             return avgEventRatings;
         }
 
-        public List<string> GetCommentsForEventId(int id)
+        public List<Rating> GetRatingForEventId(int id)
         {
-            return _eventRepo.GetCommentsForEventId(id);
+            return _eventRepo.GetRatingForEventId(id);
         }
 
         public void Update(Event ev, IFormFile image, string[] recipesId)

@@ -83,9 +83,9 @@ namespace DAO.Repositories
             _ctx.SaveChanges();
         }
 
-        public List<string> GetCommentsForEventId(int id)
+        public List<Rating> GetRatingForEventId(int id)
         {
-            var query = _ctx.Ratings.Where(r => r.EventId == id).Select(r => r.Comments).ToList();
+            var query = _ctx.Ratings.Where(r => r.EventId == id).ToList();
             return query;
         }
 
