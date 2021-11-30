@@ -3,7 +3,7 @@
 @model List<DAO.Entities.AvailableEvent>
 @{
     Layout = ViewBag.Layout;
-    ViewData["Title"] = "Default Page";
+    ViewData["Title"] = "Tasty Events - Reserva";
 }
 
 <div class="text-center">
@@ -16,7 +16,7 @@
 
     @if(TempData["Message"] != null)
     {
-        <div class="alert @TempData["AlertType"]" role="alert">
+        <div class="notification alert @TempData["AlertType"]" role="alert">
           @TempData["Message"]
         </div>
     }

@@ -2,7 +2,7 @@
 
 @{
     Layout = ViewBag.Layout;
-    ViewData["Title"] = "Mis Recetas";
+    ViewData["Title"] = "Tasty Events - Reserva";
 
     string GetColor(string state)
     {
@@ -26,7 +26,7 @@
 
 @if(TempData["Message"] != null)
 {
-    <div class="alert @TempData["AlertType"]" role="alert">
+    <div class="notification alert @TempData["AlertType"]" role="alert">
         @TempData["Message"]
     </div>
 }
