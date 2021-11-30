@@ -40,7 +40,6 @@ namespace RecetasTP.Controllers
                 eventsList = _eventList,
                 avgEventRatings = _eventService.GetAverageRating(_eventList)
             };
-
             return View(defaultEventList);
         }
 

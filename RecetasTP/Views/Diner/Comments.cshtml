@@ -5,6 +5,13 @@
     ViewData["Title"] = $"Reseña {Model.Event.Name}";
 }
 
+@if(TempData["Message"] != null)
+{
+    <div class="alert @TempData["AlertType"]" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Reseña del evento @Model.Event.Name</h3>

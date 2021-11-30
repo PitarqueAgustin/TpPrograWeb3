@@ -24,6 +24,13 @@
     }
 }
 
+@if(TempData["Message"] != null)
+{
+    <div class="alert @TempData["AlertType"]" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
 <div class="row mb-2">
     <h3> Mis reservas</h3>
 </div>

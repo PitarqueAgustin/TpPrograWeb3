@@ -28,6 +28,7 @@ namespace RecetasTP.Controllers
         }
 
         [HttpPost]
+        [Route("login")]
         public IActionResult Index(LoginModel model)
         {
             ViewBag.Layout = HttpContext.Session.GetString("layout");
@@ -40,7 +41,8 @@ namespace RecetasTP.Controllers
                     HttpContext.Session.SetInt32("userId", user.UserId);
                     HttpContext.Session.SetInt32("roleId", user.Rol);
                     TempData["value"] = $"Bienvenido, {user.Name}";
-
+                    TempData["Message"] = "Login exitoso.";
+                    TempData["AlertType"] = "alert-success";
                     return RedirectToAction("Index", "Default");
                 }
 
@@ -56,6 +58,8 @@ namespace RecetasTP.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
+            TempData["Message"] = "Deslogueo exitoso.";
+            TempData["AlertType"] = "alert-success";
             return RedirectToAction("Index", "Default");
         }
 
@@ -80,8 +84,12 @@ namespace RecetasTP.Controllers
                 if (_userService.IsMailAvailable(userModel.Email))
                 {
                     _userService.Add(userModel);
+                    TempData["Message"] = "Registro exitoso.";
+                    TempData["AlertType"] = "alert-success";
                     return Redirect("/default");
                 }
+                TempData["Message"] = "Mail no disponible.";
+                TempData["AlertType"] = "alert-warning";
                 ModelState.AddModelError(string.Empty, "El mail ingresado no está disponible");
                 return View(userModel);
             }

@@ -24,10 +24,12 @@
     }
 }
 
-<div class="row">
-    @*@TempData["Message"]*@
-</div>
-
+@if(TempData["Message"] != null)
+{
+    <div class="alert @TempData["AlertType"]" role="alert">
+      @TempData["Message"]
+    </div>
+}
 
 @* User profile *@
 <div class="container">

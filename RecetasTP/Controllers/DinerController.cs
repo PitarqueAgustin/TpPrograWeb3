@@ -85,7 +85,8 @@ namespace RecetasTP.Controllers
             };
 
             _bookingService.Add(booking);
-
+            TempData["Message"] = "Reserva realizada exitosamente.";
+            TempData["AlertType"] = "alert-success";
             return RedirectToAction("Book");
         }
 
@@ -132,10 +133,12 @@ namespace RecetasTP.Controllers
             {
                 rating.DinerId = (int)HttpContext.Session.GetInt32("userId");
                 _ratingService.Add(rating);
-
+                TempData["Message"] = "Comentario enviado exitosamente.";
+                TempData["AlertType"] = "alert-success";
                 return RedirectToAction(nameof(MyBookings));
             }
-
+            TempData["Message"] = "Error, intente nuevamente.";
+            TempData["AlertType"] = "alert-danger";
             return RedirectToAction(nameof(Comments));
         }
     }

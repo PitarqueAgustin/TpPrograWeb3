@@ -49,6 +49,8 @@ namespace RecetasTP.Controllers
             }
 
             _recipeService.Add(recipe);
+            TempData["Message"] = "Receta agregada exitosamente.";
+            TempData["AlertType"] = "alert-success";
             return RedirectToAction("Profile");
         }
 
@@ -77,7 +79,9 @@ namespace RecetasTP.Controllers
                 if (ModelState.IsValid && image != null)
                 {
                     e.ChefId = (int)HttpContext.Session.GetInt32("userId");
-                    _eventService.Add(e, image, recipes);           
+                    _eventService.Add(e, image, recipes);
+                    TempData["Message"] = "Evento agregado exitosamente.";
+                    TempData["AlertType"] = "alert-success";
                     return RedirectToAction("Profile");
                 }
                 else if (image == null)
@@ -107,6 +111,8 @@ namespace RecetasTP.Controllers
             }
 
             _eventService.Remove(id);
+            TempData["Message"] = "Evento cancelado exitosamente.";
+            TempData["AlertType"] = "alert-success";
             return RedirectToAction("Profile");
         }
 
@@ -180,7 +186,8 @@ namespace RecetasTP.Controllers
 
                 _recipeService.Update(recipe);
             }
-
+            TempData["Message"] = "Receta modificada exitosamente.";
+            TempData["AlertType"] = "alert-primary";
             return Redirect("/chef/profile");
         }
 
@@ -189,7 +196,8 @@ namespace RecetasTP.Controllers
         public IActionResult DeleteRecipe(int id)
         {
             _recipeService.Remove(id);
-
+            TempData["Message"] = "Receta borrada exitosamente.";
+            TempData["AlertType"] = "alert-success";
             return Redirect("/chef/profile");
         }
 
@@ -238,7 +246,8 @@ namespace RecetasTP.Controllers
 
                     _eventService.Update(modifiedEv, image, recipes);
                 }
-                
+                TempData["Message"] = "Evento modificado exitosamente.";
+                TempData["AlertType"] = "alert-success";
                 return Redirect("/chef/profile");
             }
             else 
@@ -256,6 +265,8 @@ namespace RecetasTP.Controllers
         public IActionResult DeleteEvent(int id)
         {
             _eventService.Remove(id);
+            TempData["Message"] = "Evento borrado exitosamente.";
+            TempData["AlertType"] = "alert-success";
             return Redirect("/chef/profile");
         }
     }
