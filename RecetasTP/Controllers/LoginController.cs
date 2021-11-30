@@ -40,6 +40,7 @@ namespace RecetasTP.Controllers
                     var user = _userService.GetByEmail(model.Email);
                     HttpContext.Session.SetInt32("userId", user.UserId);
                     HttpContext.Session.SetInt32("roleId", user.Rol);
+                    HttpContext.Session.SetString("userName", user.Name);
                     TempData["value"] = $"Bienvenido, {user.Name}";
                     TempData["Message"] = "Login exitoso.";
                     TempData["AlertType"] = "alert-success";
