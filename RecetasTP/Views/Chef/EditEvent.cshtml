@@ -4,6 +4,16 @@
     Layout = ViewBag.Layout;
     ViewData["Title"] = "Modificar evento";
     List<DAO.Entities.Recipe> recipes = ViewBag.Recipes;
+    string price;
+
+    if (Model.Price.ToString().Contains(","))
+    {
+        price = Model.Price.ToString().Remove(Model.Price.ToString().IndexOf(","));
+    }
+    else
+    {
+        price = Model.Price.ToString();
+    }
 }
 
 
@@ -47,7 +57,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label">Precio</label>
-                <input asp-for="Price" class="form-control" value="@Model.Price.ToString().Remove(Model.Price.ToString().IndexOf(","))" />
+                <input asp-for="Price" class="form-control" type="number" value="@price" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
