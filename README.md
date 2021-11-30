@@ -9,11 +9,12 @@ El requerimiento detallado lo pueden encontrar en el siguiente [documento](https
 ## Pasos para levantar el proyecto
 
 * Ejecutar script de base de datos desde la ruta: 
-Solo creación de DB:
-...TpPrograWeb3\RecetasTP\Database\Create_Database_Eng.sql
 
-Creación + demo:
-...TpPrograWeb3\RecetasTP\Database\CreateAndFill_Database_Eng.sql
+  Solo creación de DB:  
+  ```...TpPrograWeb3\RecetasTP\Database\Create_Database_Eng.sql```
+
+  Creación + demo:  
+  ```...TpPrograWeb3\RecetasTP\Database\CreateAndFill_Database_Eng.sql```
 
 **Tener en cuenta que los scripts están completamente en inglés, por ende el nombre de las entidades en los modelos varia.**
 
@@ -22,7 +23,7 @@ Creación + demo:
 
   
 ## Integrantes
-Pitarque Agustin 41588345
+Pitarque Agustin 41588345  
 Teruel Pablo 32605368
 
 ## Preguntas
