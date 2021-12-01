@@ -187,7 +187,7 @@ namespace RecetasTP.Controllers
                 _recipeService.Update(recipe);
             }
             TempData["Message"] = "Receta modificada exitosamente.";
-            TempData["AlertType"] = "alert-primary";
+            TempData["AlertType"] = "alert-success";
             return Redirect("/chef/profile");
         }
 
